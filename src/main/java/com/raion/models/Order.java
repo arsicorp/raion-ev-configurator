@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-// Represents a customer order with vehicle and optional features
-// This class uses composition - it HAS-A Vehicle and HAS-MANY Features
+// represents a customer order with vehicle and optional features
+// this class uses composition - it has-a vehicle and has-many features
 public class Order {
 
     private final String orderId;
@@ -16,10 +16,10 @@ public class Order {
 
     private static final double TAX_RATE = 0.085; // 8.5% sales tax
 
-    // Create a new order with a vehicle
+    // create a new order with a vehicle
     public Order(Vehicle vehicle) {
         if (vehicle == null) {
-            throw new IllegalArgumentException("Vehicle cannot be null");
+            throw new IllegalArgumentException("vehicle cannot be null");
         }
 
         this.vehicle = vehicle;
@@ -28,19 +28,19 @@ public class Order {
         this.orderId = generateOrderId();
     }
 
-    // Generate order ID from timestamp: yyyyMMdd-hhmmss
+    // generate order id from timestamp: yyyymmdd-hhmmss
     private String generateOrderId() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
         return orderDate.format(formatter);
     }
 
-    // Add a feature to the order (option, service package, or accessory)
+    // add a feature to the order (option, service package, or accessory)
     public void addFeature(Feature feature) {
         if (feature == null) {
-            throw new IllegalArgumentException("Feature cannot be null");
+            throw new IllegalArgumentException("feature cannot be null");
         }
 
-        // Check if feature is eligible for this vehicle level
+        // check if feature is eligible for this vehicle level
         if (!feature.isEligibleFor(vehicle.getLevel())) {
             throw new IllegalArgumentException(
                     feature.getName() + " is not available for " + vehicle.getModelName()
@@ -50,17 +50,17 @@ public class Order {
         features.add(feature);
     }
 
-    // Remove a feature from the order
+    // remove a feature from the order
     public void removeFeature(Feature feature) {
         features.remove(feature);
     }
 
-    // Get all features in the order
+    // get all features in the order
     public List<Feature> getFeatures() {
-        return new ArrayList<>(features); // Return copy to protect internal list
+        return new ArrayList<>(features); // return copy to protect internal list
     }
 
-    // Calculate total price of all features
+    // calculate total price of all features
     public double calculateFeaturesTotal() {
         double total = 0;
         for (Feature feature : features) {
@@ -69,53 +69,53 @@ public class Order {
         return total;
     }
 
-    // Calculate subtotal (vehicle + features, before tax)
+    // calculate subtotal (vehicle + features, before tax)
     public double calculateSubtotal() {
         return vehicle.calculatePrice() + calculateFeaturesTotal();
     }
 
-    // Calculate tax on subtotal
+    // calculate tax on subtotal
     public double calculateTax() {
         return calculateSubtotal() * TAX_RATE;
     }
 
-    // Calculate final total (subtotal + tax)
+    // calculate final total (subtotal + tax)
     public double calculateTotal() {
         return calculateSubtotal() + calculateTax();
     }
 
-    // Calculate estimated monthly payment
-    // Default: 60 months, $10,000 down, 5.9% APR
+    // calculate estimated monthly payment
+    // default: 60 months, $10,000 down, 5.9% apr
     public double calculateMonthlyPayment() {
         return calculateMonthlyPayment(60, 10000, 5.9);
     }
 
-    // Calculate monthly payment with custom terms
+    // calculate monthly payment with custom terms
     public double calculateMonthlyPayment(int months, double downPayment, double aprPercent) {
         if (months <= 0) {
-            throw new IllegalArgumentException("Months must be positive");
+            throw new IllegalArgumentException("months must be positive");
         }
         if (downPayment < 0) {
-            throw new IllegalArgumentException("Down payment cannot be negative");
+            throw new IllegalArgumentException("down payment cannot be negative");
         }
         if (aprPercent < 0) {
-            throw new IllegalArgumentException("APR cannot be negative");
+            throw new IllegalArgumentException("apr cannot be negative");
         }
 
         double total = calculateTotal();
         double loanAmount = total - downPayment;
 
-        // If loan amount is zero or negative, no monthly payment
+        // if loan amount is zero or negative, no monthly payment
         if (loanAmount <= 0) {
             return 0;
         }
 
-        // Convert APR to monthly rate
+        // convert apr to monthly rate
         double monthlyRate = (aprPercent / 100) / 12;
 
-        // Standard loan payment formula: P * [r(1+r)^n] / [(1+r)^n - 1]
+        // standard loan payment formula: p * [r(1+r)^n] / [(1+r)^n - 1]
         if (monthlyRate == 0) {
-            // If 0% interest, just divide by months
+            // if 0% interest, just divide by months
             return loanAmount / months;
         }
 
@@ -126,7 +126,7 @@ public class Order {
         return monthlyPayment;
     }
 
-    // Getters
+    // getters
     public String getOrderId() {
         return orderId;
     }
@@ -139,13 +139,13 @@ public class Order {
         return orderDate;
     }
 
-    // Format order date for display
+    // format order date for display
     public String getFormattedOrderDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy HH:mm:ss");
         return orderDate.format(formatter);
     }
 
-    // Generate a summary of the order
+    // generate a summary of the order
     public String getOrderSummary() {
         StringBuilder summary = new StringBuilder();
 

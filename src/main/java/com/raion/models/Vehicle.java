@@ -1,31 +1,31 @@
 package com.raion.models;
 
-// Base class for all Raion vehicles
-// Level1, Level2, Level3, and Level4 all extend this
+// base class for all raion vehicles
+// level1, level2, level3, and level4 all extend this
 public abstract class Vehicle {
 
-    // Shared properties across all vehicles
+    // shared properties across all vehicles
     protected String modelName;
     protected TrimLevel trimLevel;
     protected VehicleColor color;
     protected double basePrice;
     protected int power; // horsepower
     protected int range; // miles
-    protected int batteryCapacity; // kWh
+    protected int batteryCapacity; // kwh
     protected double acceleration; // 0-60 mph time in seconds
     protected int topSpeed; // mph
-    protected String drivetrain; // RWD, AWD, etc.
+    protected String drivetrain; // rwd, awd, etc.
 
-    // Constructor all subclasses will use
+    // constructor all subclasses will use
     protected Vehicle(String modelName, TrimLevel trimLevel, VehicleColor color) {
         if (modelName == null || modelName.trim().isEmpty()) {
-            throw new IllegalArgumentException("Model name cannot be empty");
+            throw new IllegalArgumentException("model name cannot be empty");
         }
         if (trimLevel == null) {
-            throw new IllegalArgumentException("Trim level cannot be null");
+            throw new IllegalArgumentException("trim level cannot be null");
         }
         if (color == null) {
-            throw new IllegalArgumentException("Color cannot be null");
+            throw new IllegalArgumentException("color cannot be null");
         }
 
         this.modelName = modelName;
@@ -33,7 +33,7 @@ public abstract class Vehicle {
         this.color = color;
     }
 
-    // Getters for all properties
+    // getters for all properties
     public String getModelName() {
         return modelName;
     }
@@ -74,78 +74,78 @@ public abstract class Vehicle {
         return drivetrain;
     }
 
-    // Setters for properties that subclasses will configure
+    // setters for properties that subclasses will configure
     protected void setBasePrice(double basePrice) {
         if (basePrice < 0) {
-            throw new IllegalArgumentException("Base price cannot be negative");
+            throw new IllegalArgumentException("base price cannot be negative");
         }
         this.basePrice = basePrice;
     }
 
     protected void setPower(int power) {
         if (power <= 0) {
-            throw new IllegalArgumentException("Power must be positive");
+            throw new IllegalArgumentException("power must be positive");
         }
         this.power = power;
     }
 
     protected void setRange(int range) {
         if (range <= 0) {
-            throw new IllegalArgumentException("Range must be positive");
+            throw new IllegalArgumentException("range must be positive");
         }
         this.range = range;
     }
 
     protected void setBatteryCapacity(int batteryCapacity) {
         if (batteryCapacity <= 0) {
-            throw new IllegalArgumentException("Battery capacity must be positive");
+            throw new IllegalArgumentException("battery capacity must be positive");
         }
         this.batteryCapacity = batteryCapacity;
     }
 
     protected void setAcceleration(double acceleration) {
         if (acceleration <= 0) {
-            throw new IllegalArgumentException("Acceleration time must be positive");
+            throw new IllegalArgumentException("acceleration time must be positive");
         }
         this.acceleration = acceleration;
     }
 
     protected void setTopSpeed(int topSpeed) {
         if (topSpeed <= 0) {
-            throw new IllegalArgumentException("Top speed must be positive");
+            throw new IllegalArgumentException("top speed must be positive");
         }
         this.topSpeed = topSpeed;
     }
 
     protected void setDrivetrain(String drivetrain) {
         if (drivetrain == null || drivetrain.trim().isEmpty()) {
-            throw new IllegalArgumentException("Drivetrain cannot be empty");
+            throw new IllegalArgumentException("drivetrain cannot be empty");
         }
         this.drivetrain = drivetrain;
     }
 
-    // Abstract methods that each vehicle type must implement
-    // Each level has different pricing logic based on trim
+    // abstract methods that each vehicle type must implement
+    // each level has different pricing logic based on trim
     public abstract double calculatePrice();
 
-    // Return formatted specifications for display
+    // return formatted specifications for display
     public abstract String getSpecifications();
 
-    // Get the vehicle level (1, 2, 3, or 4)
-    // Used for validation and feature eligibility
+    // get the vehicle level (1, 2, 3, or 4)
+    // used for validation and feature eligibility
     public abstract int getLevel();
 
-    // Calculate estimated charging time in hours for Level 2 home charging
-    // Assumes 11 kW charger (typical home setup)
+    // calculate estimated charging time in hours for level 2 home charging
+    // assumes 11 kw charger (typical home setup)
     public double getHomeChargingTime() {
-        double chargerPower = 11.0; // kW
+        double chargerPower = 11.0; // kw
         return batteryCapacity / chargerPower;
     }
 
-    // Calculate estimated DC fast charging time to 80% in minutes
-    // Assumes 350 kW fast charger
+    // calculate estimated dc fast charging time to 80% in minutes
+    // assumes 350 kw fast charger
     public double getFastChargingTime() {
-        double chargerPower = 350.0; // kW
+        double chargerPower = 350.0; // kw
         double chargeToPercent = 0.8; // charge to 80%
         return (batteryCapacity * chargeToPercent / chargerPower) * 60; // convert hours to minutes
     }

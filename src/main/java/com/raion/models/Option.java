@@ -1,7 +1,7 @@
 package com.raion.models;
 
-// Vehicle-specific upgrades and enhancements
-// These are the big-ticket options like autopilot systems, massage seats, etc.
+// vehicle-specific upgrades and enhancements
+// these are the big-ticket options like autopilot systems, massage seats, etc.
 public class Option implements Feature {
 
     private final String name;
@@ -10,18 +10,18 @@ public class Option implements Feature {
     private final String category;
     private final Integer restrictedToLevel; // null means available on all levels
 
-    // Constructor for options available on all vehicles
+    // constructor for options available on all vehicles
     public Option(String name, double price, String description, String category) {
         this(name, price, description, category, null);
     }
 
-    // Constructor for options restricted to specific vehicle level
+    // constructor for options restricted to specific vehicle level
     public Option(String name, double price, String description, String category, Integer restrictedToLevel) {
         if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Option name cannot be empty");
+            throw new IllegalArgumentException("option name cannot be empty");
         }
         if (price < 0) {
-            throw new IllegalArgumentException("Option price cannot be negative");
+            throw new IllegalArgumentException("option price cannot be negative");
         }
 
         this.name = name;
@@ -53,22 +53,22 @@ public class Option implements Feature {
 
     @Override
     public boolean isEligibleFor(int vehicleLevel) {
-        // If no restriction, available on all levels
+        // if no restriction, available on all levels
         if (restrictedToLevel == null) {
             return true;
         }
-        // Otherwise, check if it matches the restricted level
+        // otherwise, check if it matches the restricted level
         return restrictedToLevel == vehicleLevel;
     }
 
-    // Factory methods for commonly used options
-    // Makes it easy to create standard options across the app
+    // factory methods for commonly used options
+    // makes it easy to create standard options across the app
 
     public static Option createEnhancedAutopilot() {
         return new Option(
                 "Enhanced Autopilot",
                 6000.00,
-                "Navigate on Autopilot, Auto Lane Change, Autopark, Summon, Smart Summon",
+                "navigate on autopilot, auto lane change, autopark, summon, smart summon",
                 "Autopilot"
         );
     }
@@ -77,7 +77,7 @@ public class Option implements Feature {
         return new Option(
                 "Full Self-Driving Capability",
                 8000.00,
-                "All Enhanced Autopilot features plus Traffic Light and Stop Sign Control, Autosteer on city streets",
+                "all enhanced autopilot features plus traffic light and stop sign control, autosteer on city streets",
                 "Autopilot"
         );
     }
@@ -86,7 +86,7 @@ public class Option implements Feature {
         return new Option(
                 "Massage Seats (Front & Rear)",
                 3000.00,
-                "Multi-point massage functionality for front and rear seats",
+                "multi-point massage functionality for front and rear seats",
                 "Comfort"
         );
     }
@@ -97,7 +97,7 @@ public class Option implements Feature {
                 5000.00,
                 "18-point massage functionality for front and rear executive seats",
                 "Comfort",
-                4 // Level 4 only
+                4 // level 4 only
         );
     }
 
@@ -105,7 +105,7 @@ public class Option implements Feature {
         return new Option(
                 "Custom Paint Color",
                 2000.00,
-                "Exclusive custom paint finish beyond standard color options",
+                "exclusive custom paint finish beyond standard color options",
                 "Exterior"
         );
     }
@@ -114,9 +114,9 @@ public class Option implements Feature {
         return new Option(
                 "Track Package",
                 10000.00,
-                "Carbon ceramic brakes, track telemetry system, lap timer with GPS, performance data recorder",
+                "carbon ceramic brakes, track telemetry system, lap timer with gps, performance data recorder",
                 "Performance",
-                3 // Level 3 only
+                3 // level 3 only
         );
     }
 

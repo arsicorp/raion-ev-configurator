@@ -1,42 +1,42 @@
 package com.raion.models;
 
-// Level 3 - Performance Sedan (inspired by Xiaomi SU7 Max Ultra + Porsche Taycan)
-// Available in: Purple, Burgundy, Green (exclusive performance colors)
-// Trims: Pro ($125k), Max ($130k), Ultra ($135k)
-// Focus: Blistering performance with luxury touches
+// level 3 - performance sedan (inspired by xiaomi su7 max ultra + porsche taycan)
+// available in: purple, burgundy, green (exclusive performance colors)
+// trims: pro ($125k), max ($130k), ultra ($135k)
+// focus: blistering performance with luxury touches
 public class Level3 extends Vehicle {
 
     private static final String MODEL_NAME = "Raion Level 3";
-    private static final int BATTERY_CAPACITY = 94; // kWh (93.7 rounded)
+    private static final int BATTERY_CAPACITY = 94; // kwh (93.7 rounded)
     private static final int STANDARD_RANGE = 350; // miles (reduced due to performance)
 
     public Level3(TrimLevel trimLevel, VehicleColor color) {
         super(MODEL_NAME, trimLevel, color);
 
-        // Validate this trim is allowed for Level 3
+        // validate this trim is allowed for level 3
         if (!trimLevel.isLevel3Trim()) {
             throw new IllegalArgumentException(
-                    "Invalid trim for Level 3. Must be PRO, MAX, or ULTRA"
+                    "invalid trim for level 3. must be pro, max, or ultra"
             );
         }
 
-        // Validate this color is allowed for Level 3
+        // validate this color is allowed for level 3
         if (!color.isLevel3Color()) {
             throw new IllegalArgumentException(
-                    "Invalid color for Level 3. Must be PURPLE, BURGUNDY, or GREEN"
+                    "invalid color for level 3. must be purple, burgundy, or green"
             );
         }
 
-        // Set common specs for all Level 3 vehicles
+        // set common specs for all level 3 vehicles
         setBatteryCapacity(BATTERY_CAPACITY);
         setRange(STANDARD_RANGE);
         setDrivetrain("AWD (Tri-Motor)");
 
-        // Configure trim-specific specs
+        // configure trim-specific specs
         configureTrimSpecs();
     }
 
-    // Set up specs based on which trim was selected
+    // set up specs based on which trim was selected
     private void configureTrimSpecs() {
         switch (trimLevel) {
             case PRO:
@@ -61,7 +61,7 @@ public class Level3 extends Vehicle {
                 break;
 
             default:
-                throw new IllegalStateException("Unexpected trim level: " + trimLevel);
+                throw new IllegalStateException("unexpected trim level: " + trimLevel);
         }
     }
 
@@ -84,10 +84,10 @@ public class Level3 extends Vehicle {
         specs.append("Battery: ").append(batteryCapacity).append(" kWh\n");
         specs.append("Base Price: $").append(String.format("%,.2f", basePrice)).append("\n");
 
-        // Add charging estimates
+        // add charging estimates
         specs.append("\nCharging Times:\n");
         specs.append("Home (Level 2): ").append(String.format("%.1f", getHomeChargingTime())).append(" hours\n");
-        specs.append("DC Fast Charge (to 80%%): ").append(String.format("%.0f", getFastChargingTime())).append(" minutes\n");
+        specs.append("DC Fast Charge (to 80%): ").append(String.format("%.0f", getFastChargingTime())).append(" minutes\n");
 
         return specs.toString();
     }
@@ -97,33 +97,33 @@ public class Level3 extends Vehicle {
         return 3;
     }
 
-    // Get trim-specific features description
+    // get trim-specific features description
     public String getTrimFeatures() {
         switch (trimLevel) {
             case PRO:
-                return "Pro features include: Sport seats with aggressive bolsters, carbon fiber interior trim, " +
-                        "Alcantara steering wheel, 15-inch touchscreen, glass panoramic roof, Track Mode, " +
-                        "Launch Control, carbon ceramic brakes, adaptive sport suspension, " +
-                        "21-inch forged wheels, enhanced cooling system, all Level 1 Standard features";
+                return "pro features include: sport seats with aggressive bolsters, carbon fiber interior trim, " +
+                        "alcantara steering wheel, 15-inch touchscreen, glass panoramic roof, track mode, " +
+                        "launch control, carbon ceramic brakes, adaptive sport suspension, " +
+                        "21-inch forged wheels, enhanced cooling system, all level 1 standard features";
 
             case MAX:
-                return "Max adds: Premium Nappa leather sport seats, premium audio (24 speakers), " +
-                        "full Alcantara headliner, extended carbon fiber package (interior), " +
+                return "max adds: premium nappa leather sport seats, premium audio (24 speakers), " +
+                        "full alcantara headliner, extended carbon fiber package (interior), " +
                         "21-inch lightweight forged wheels, enhanced ambient lighting, " +
                         "upgraded instrument cluster display, more luxury refinement";
 
             case ULTRA:
-                return "Ultra adds: Full carbon fiber exterior package (hood, roof, trunk, spoiler), " +
+                return "ultra adds: full carbon fiber exterior package (hood, roof, trunk, spoiler), " +
                         "track suspension (adjustable, race-tuned), upgraded carbon ceramic brakes, " +
                         "ultra-lightweight 21-inch carbon wheels, race-spec tires, track telemetry system, " +
-                        "lap timer with GPS, performance data recorder, front splitter and rear diffuser, active rear wing";
+                        "lap timer with gps, performance data recorder, front splitter and rear diffuser, active rear wing";
 
             default:
                 return "";
         }
     }
 
-    // Check if this is the ultimate performance trim
+    // check if this is the ultimate performance trim
     public boolean isUltraTrim() {
         return trimLevel == TrimLevel.ULTRA;
     }

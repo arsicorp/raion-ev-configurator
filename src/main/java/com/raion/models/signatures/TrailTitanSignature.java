@@ -8,80 +8,80 @@ import com.raion.models.VehicleColor;
 import java.util.ArrayList;
 import java.util.List;
 
-// Trail Titan Signature - Pre-configured Level 2 Off-Road
-// Built for adventure seekers and weekend warriors
-// Saves $1,000 compared to building the same configuration
+// trail titan signature - pre-configured level 2 off-road
+// built for adventure seekers and weekend warriors
+// saves $1,000 compared to building the same configuration
 public class TrailTitanSignature extends Level2 {
 
-    private static final double SIGNATURE_PRICE = 98500.00;
+    private static final double SIGNATURE_PRICE = 97500.00;
     private static final double SAVINGS = 1000.00;
     private final List<ServicePackage> includedPackages;
 
     public TrailTitanSignature() {
-        // Pre-configured as Level 2 Off-Road in Black
+        // pre-configured as level 2 off-road in black
         super(TrimLevel.OFFROAD, VehicleColor.BLACK);
 
-        // Build list of included service packages
+        // build list of included service packages
         this.includedPackages = new ArrayList<>();
         this.includedPackages.add(ServicePackage.createPremiumMaintenance5Year());
     }
 
     @Override
     public double calculatePrice() {
-        // Fixed signature price instead of base + packages
+        // fixed signature price instead of base + packages
         return SIGNATURE_PRICE;
     }
 
-    // Get the signature name
+    // get the signature name
     public String getSignatureName() {
         return "Trail Titan";
     }
 
-    // Get full signature description
+    // get full signature description
     public String getSignatureDescription() {
-        return "Dominate any terrain with confidence. " +
-                "Combines rugged off-road capability with worry-free maintenance coverage " +
+        return "dominate any terrain with confidence. " +
+                "combines rugged off-road capability with worry-free maintenance coverage " +
                 "for epic adventures.";
     }
 
-    // Get what's included in this signature
+    // get what's included in this signature
     public String getIncludedFeatures() {
         StringBuilder features = new StringBuilder();
-        features.append("INCLUDED IN TRAIL TITAN SIGNATURE:\n");
-        features.append("- Level 2 Off-Road trim (670 hp, 450 miles range)\n");
-        features.append("- Obsidian Black paint\n");
-        features.append("- Premium Maintenance Package 5-Year ($3,500 value)\n");
-        features.append("- Lifted air suspension (+2 inches ground clearance)\n");
-        features.append("- Off-road drive modes (Rock, Sand, Mud)\n");
-        features.append("- Underbody protection (skid plates)\n");
-        features.append("- All-terrain tires on reinforced 20-inch wheels\n");
-        features.append("- Front tow hooks and hill descent control\n");
-        features.append("- Off-road camera system\n");
-        features.append("- All Level 2 Standard features\n");
+        features.append("included in trail titan signature:\n");
+        features.append("- level 2 off-road trim (670 hp, 450 miles range)\n");
+        features.append("- obsidian black paint\n");
+        features.append("- premium maintenance package 5-year ($3,500 value)\n");
+        features.append("- lifted air suspension (+2 inches ground clearance)\n");
+        features.append("- off-road drive modes (rock, sand, mud)\n");
+        features.append("- underbody protection (skid plates)\n");
+        features.append("- all-terrain tires on reinforced 20-inch wheels\n");
+        features.append("- front tow hooks and hill descent control\n");
+        features.append("- off-road camera system\n");
+        features.append("- all level 2 standard features\n");
 
         return features.toString();
     }
 
-    // Get the list of included service packages
+    // get the list of included service packages
     public List<ServicePackage> getIncludedPackages() {
-        return new ArrayList<>(includedPackages); // Return defensive copy
+        return new ArrayList<>(includedPackages); // return defensive copy
     }
 
-    // Calculate what the customer would pay if building this manually
+    // calculate what the customer would pay if building this manually
     public double getRegularPrice() {
-        double offroadPrice = 95000; // Level 2 Off-Road base
+        double offroadPrice = 95000; // level 2 off-road base
         double maintenancePackage = 3500;
         return offroadPrice + maintenancePackage;
     }
 
-    // How much customer saves with signature package
+    // how much customer saves with signature package
     public double getSavings() {
         return SAVINGS;
     }
 
-    // Get target customer description
+    // get target customer description
     public String getTargetCustomer() {
-        return "Perfect for: Adventure seekers, weekend warriors, off-road enthusiasts, " +
+        return "perfect for: adventure seekers, weekend warriors, off-road enthusiasts, " +
                 "families who love exploring rugged terrain";
     }
 
@@ -91,7 +91,7 @@ public class TrailTitanSignature extends Level2 {
                 " (Save $" + String.format("%.2f", SAVINGS) + ")";
     }
 
-    // Override specifications to show signature info
+    // override specifications to show signature info
     @Override
     public String getSpecifications() {
         StringBuilder specs = new StringBuilder();
@@ -101,7 +101,7 @@ public class TrailTitanSignature extends Level2 {
         specs.append("Regular Price: $").append(String.format("%,.2f", getRegularPrice())).append("\n");
         specs.append("You Save: $").append(String.format("%.2f", SAVINGS)).append("\n\n");
 
-        // Add standard vehicle specs
+        // add standard vehicle specs
         specs.append("Body Style: Full-Size SUV\n");
         specs.append("Seating: 7 passengers\n");
         specs.append("Color: ").append(getColor().getDisplayName()).append("\n");

@@ -1,30 +1,30 @@
 package com.raion.models;
 
-// All the trim levels we offer across our vehicle lineup
-// Level 1 (Compact Sedan): Standard, Premium, Performance
-// Level 2 (Full-Size SUV): Standard, Premium, Off-Road
-// Level 3 (Performance Sedan): Pro, Max, Ultra
-// Level 4 (Ultra-Luxury SUV): Flagship only
+// all the trim levels we offer across our vehicle lineup
+// level 1 (compact sedan): standard, premium, performance
+// level 2 (full-size suv): standard, premium, off-road
+// level 3 (performance sedan): pro, max, ultra
+// level 4 (ultra-luxury suv): flagship only
 
 public enum TrimLevel {
 
-    // Level 1 & 2 trims
-    STANDARD("Standard", "Essential features with impressive performance"),
-    PREMIUM("Premium", "Enhanced luxury and premium materials"),
+    // level 1 & 2 trims
+    STANDARD("Standard", "essential features with impressive performance"),
+    PREMIUM("Premium", "enhanced luxury and premium materials"),
 
-    // Level 1 only
-    PERFORMANCE("Performance", "Sport-tuned with enhanced power and handling"),
+    // level 1 only
+    PERFORMANCE("Performance", "sport-tuned with enhanced power and handling"),
 
-    // Level 2 only
-    OFFROAD("Off-Road", "Rugged capability for adventure enthusiasts"),
+    // level 2 only
+    OFFROAD("Off-Road", "rugged capability for adventure enthusiasts"),
 
-    // Level 3 only
-    PRO("Pro", "Professional-grade performance for driving purists"),
-    MAX("Max", "Maximum luxury meets blistering performance"),
-    ULTRA("Ultra", "Ultimate expression of speed and technology"),
+    // level 3 only
+    PRO("Pro", "professional-grade performance for driving purists"),
+    MAX("Max", "maximum luxury meets blistering performance"),
+    ULTRA("Ultra", "ultimate expression of speed and technology"),
 
-    // Level 4 only
-    FLAGSHIP("Flagship", "The pinnacle of luxury and innovation");
+    // level 4 only
+    FLAGSHIP("Flagship", "the pinnacle of luxury and innovation");
 
     private final String displayName;
     private final String description;
@@ -42,7 +42,7 @@ public enum TrimLevel {
         return description;
     }
 
-    // Check which vehicle level can use this trim
+    // check which vehicle level can use this trim
     public boolean isLevel1Trim() {
         return this == STANDARD || this == PREMIUM || this == PERFORMANCE;
     }

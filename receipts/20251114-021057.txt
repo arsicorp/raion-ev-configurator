@@ -1,0 +1,47 @@
+============================================================
+RAION MOTORS
+Electric Vehicle Order Receipt
+============================================================
+Order ID: 20251114-021057
+Date: November 14, 2025 02:10:57
+
+VEHICLE CONFIGURATION
+============================================================
+Model: Raion Level 1
+Trim: Standard
+Color: Pearl White
+Drivetrain: RWD
+Range: 400 miles
+Base Price: $45,000.00
+
+ADDED FEATURES
+============================================================
+Custom Paint Color: $2,000.00
+Home EV Charger (Level 2, 240V): $800.00
+
+SUMMARY
+============================================================
+Subtotal: $47,800.00
+Tax (8.5%): $4,063.00
+============================================================
+TOTAL: $51,863.00
+
+ESTIMATED MONTHLY PAYMENT: $807.38
+(Based on: 60 months, $10,000 down, 5.9% APR)
+
+VEHICLE SPECIFICATIONS
+============================================================
+Power: 290 hp
+0-60 mph: 5.0 seconds
+Top Speed: 140 mph
+Range: 400 miles
+Battery: 80 kWh
+
+ENVIRONMENTAL IMPACT
+============================================================
+Estimated CO2 Saved (5 years): 23 tons
+Equivalent to planting: 1150 trees
+
+Thank you for choosing Raion Motors!
+www.raionmotors.com | support@raionmotors.com
+============================================================

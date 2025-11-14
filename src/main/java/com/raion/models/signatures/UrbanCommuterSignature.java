@@ -8,78 +8,78 @@ import com.raion.models.VehicleColor;
 import java.util.ArrayList;
 import java.util.List;
 
-// Urban Commuter Signature - Pre-configured Level 1 Premium
-// Perfect for daily city commuters and tech-savvy professionals
-// Saves $500 compared to building the same configuration
+// urban commuter signature - pre-configured level 1 premium
+// perfect for daily city commuters and tech-savvy professionals
+// saves $500 compared to building the same configuration
 public class UrbanCommuterSignature extends Level1 {
 
-    private static final double SIGNATURE_PRICE = 58000.00;
+    private static final double SIGNATURE_PRICE = 55500.00;
     private static final double SAVINGS = 500.00;
     private final List<Option> includedOptions;
 
     public UrbanCommuterSignature() {
-        // Pre-configured as Level 1 Premium in Silver
+        // pre-configured as level 1 premium in silver
         super(TrimLevel.PREMIUM, VehicleColor.SILVER);
 
-        // Build list of included options
+        // build list of included options
         this.includedOptions = new ArrayList<>();
         this.includedOptions.add(Option.createEnhancedAutopilot());
     }
 
     @Override
     public double calculatePrice() {
-        // Fixed signature price instead of base + options
+        // fixed signature price instead of base + options
         return SIGNATURE_PRICE;
     }
 
-    // Get the signature name
+    // get the signature name
     public String getSignatureName() {
         return "Urban Commuter";
     }
 
-    // Get full signature description
+    // get full signature description
     public String getSignatureDescription() {
-        return "The perfect daily driver for city professionals. " +
-                "Combines Premium luxury with advanced autonomous driving features " +
+        return "the perfect daily driver for city professionals. " +
+                "combines premium luxury with advanced autonomous driving features " +
                 "for stress-free commuting.";
     }
 
-    // Get what's included in this signature
+    // get what's included in this signature
     public String getIncludedFeatures() {
         StringBuilder features = new StringBuilder();
-        features.append("INCLUDED IN URBAN COMMUTER SIGNATURE:\n");
-        features.append("- Level 1 Premium trim (290 hp, 400 miles range)\n");
-        features.append("- Liquid Silver metallic paint\n");
-        features.append("- Enhanced Autopilot ($6,000 value)\n");
-        features.append("- Premium audio system (18 speakers)\n");
+        features.append("included in urban commuter signature:\n");
+        features.append("- level 1 premium trim (290 hp, 400 miles range)\n");
+        features.append("- liquid silver metallic paint\n");
+        features.append("- enhanced autopilot ($6,000 value)\n");
+        features.append("- premium audio system (18 speakers)\n");
         features.append("- 20-inch alloy wheels\n");
-        features.append("- Upgraded Nappa leather seats\n");
-        features.append("- Enhanced ambient lighting\n");
-        features.append("- All Level 1 Premium features\n");
+        features.append("- upgraded nappa leather seats\n");
+        features.append("- enhanced ambient lighting\n");
+        features.append("- all level 1 premium features\n");
 
         return features.toString();
     }
 
-    // Get the list of included options
+    // get the list of included options
     public List<Option> getIncludedOptions() {
-        return new ArrayList<>(includedOptions); // Return defensive copy
+        return new ArrayList<>(includedOptions); // return defensive copy
     }
 
-    // Calculate what the customer would pay if building this manually
+    // calculate what the customer would pay if building this manually
     public double getRegularPrice() {
-        double premiumPrice = 50000; // Level 1 Premium base
+        double premiumPrice = 50000; // level 1 premium base
         double enhancedAutopilot = 6000;
         return premiumPrice + enhancedAutopilot;
     }
 
-    // How much customer saves with signature package
+    // how much customer saves with signature package
     public double getSavings() {
         return SAVINGS;
     }
 
-    // Get target customer description
+    // get target customer description
     public String getTargetCustomer() {
-        return "Perfect for: Daily city commuters, tech-savvy professionals, " +
+        return "perfect for: daily city commuters, tech-savvy professionals, " +
                 "eco-conscious drivers who value convenience and automation";
     }
 
@@ -89,7 +89,7 @@ public class UrbanCommuterSignature extends Level1 {
                 " (Save $" + String.format("%.2f", SAVINGS) + ")";
     }
 
-    // Override specifications to show signature info
+    // override specifications to show signature info
     @Override
     public String getSpecifications() {
         StringBuilder specs = new StringBuilder();
@@ -99,7 +99,7 @@ public class UrbanCommuterSignature extends Level1 {
         specs.append("Regular Price: $").append(String.format("%,.2f", getRegularPrice())).append("\n");
         specs.append("You Save: $").append(String.format("%.2f", SAVINGS)).append("\n\n");
 
-        // Add standard vehicle specs
+        // add standard vehicle specs
         specs.append("Body Style: Compact Sedan\n");
         specs.append("Color: ").append(getColor().getDisplayName()).append("\n");
         specs.append("Drivetrain: ").append(getDrivetrain()).append("\n");

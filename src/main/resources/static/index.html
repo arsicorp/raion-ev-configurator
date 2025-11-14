@@ -3,365 +3,533 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Raion Motors - Configure your perfect electric vehicle with advanced performance and luxury features">
-    <title>Raion Motors - Electric Vehicle Configurator</title>
+    <meta name="description" content="Raion Motors - Configure your luxury electric vehicle">
+    <title>Raion Motors</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <h1>RAION MOTORS</h1>
-                    <p class="tagline">Electric Performance Refined</p>
+
+<!-- navigation bar -->
+<nav class="nav">
+    <div class="nav-container">
+        <a href="#/" class="logo">RAION MOTORS</a>
+        <div class="nav-links">
+            <a href="#/" class="nav-link" data-page="home">Home</a>
+            <a href="#build" class="nav-link" data-page="build">Build</a>
+            <a href="#signatures" class="nav-link" data-page="signatures">Signatures</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ===================================
+     HOME PAGE
+     =================================== -->
+<div id="homePage" class="page active">
+    <!-- hero section with text overlaid on image -->
+    <div class="hero">
+        <img src="images/hero.png" alt="Raion Motors" class="hero-image">
+        <div class="hero-overlay">
+            <p class="hero-subtitle">ELECTRIC PERFORMANCE REFINED</p>
+        </div>
+    </div>
+</div>
+
+<!-- ===================================
+     BUILD PAGE - MODEL SELECTION
+     =================================== -->
+<div id="buildPage" class="page">
+    <div class="page-content">
+
+        <!-- model selection view -->
+        <div id="modelSelectionView" class="view active">
+            <div class="container">
+                <h2 class="page-title">Select Your Model</h2>
+
+                <div class="model-grid">
+                    <!-- level 1 -->
+                    <div class="model-card" data-level="1">
+                        <div class="card-image">
+                            <img src="images/level1/white/front.png" alt="Level 1 Sedan">
+                        </div>
+                        <div class="card-content">
+                            <h3>Level 1</h3>
+                            <p class="card-subtitle">Compact Sedan</p>
+                            <p class="card-price">From $45,000</p>
+                            <div class="card-specs">
+                                <span>290 hp</span>
+                                <span>400 mi</span>
+                                <span>5.0s</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- level 2 -->
+                    <div class="model-card" data-level="2">
+                        <div class="card-image">
+                            <img src="images/level2/white/front.png" alt="Level 2 SUV">
+                        </div>
+                        <div class="card-content">
+                            <h3>Level 2</h3>
+                            <p class="card-subtitle">Full-Size SUV</p>
+                            <p class="card-price">From $85,000</p>
+                            <div class="card-specs">
+                                <span>670 hp</span>
+                                <span>450 mi</span>
+                                <span>6.0s</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- level 3 -->
+                    <div class="model-card" data-level="3">
+                        <div class="card-image">
+                            <img src="images/level3/purple/front.png" alt="Level 3 Performance">
+                        </div>
+                        <div class="card-content">
+                            <h3>Level 3</h3>
+                            <p class="card-subtitle">Performance Sedan</p>
+                            <p class="card-price">From $125,000</p>
+                            <div class="card-specs">
+                                <span>1,527 hp</span>
+                                <span>350 mi</span>
+                                <span>2.0s</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- level 4 -->
+                    <div class="model-card" data-level="4">
+                        <div class="card-image">
+                            <img src="images/level4/black/front.png" alt="Level 4 Ultra-Luxury">
+                        </div>
+                        <div class="card-content">
+                            <h3>Level 4</h3>
+                            <p class="card-subtitle">Ultra-Luxury SUV</p>
+                            <p class="card-price">$185,000</p>
+                            <div class="card-specs">
+                                <span>1,180 hp</span>
+                                <span>620 mi</span>
+                                <span>3.2s</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <nav class="main-nav">
-                    <a href="#" class="nav-link">Models</a>
-                    <a href="#" class="nav-link">Technology</a>
-                    <a href="#" class="nav-link">Support</a>
-                </nav>
             </div>
         </div>
-    </header>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
-            <!-- Tab Navigation -->
-            <div class="tab-navigation">
-                <button class="tab-button active" data-tab="custom-build">
-                    Custom Build
-                </button>
-                <button class="tab-button" data-tab="signature-models">
-                    Signature Collection
-                </button>
-            </div>
+        <!-- configurator view -->
+        <div id="configuratorView" class="view">
+            <div class="config-layout">
+                <!-- left side -->
+                <div class="config-left">
+                    <button class="back-btn" id="backToModels">&larr; Back to Models</button>
 
-            <!-- Custom Build Tab -->
-            <div id="custom-build" class="tab-content active">
-                <section class="configurator-section">
-                    <!-- Vehicle Display -->
                     <div class="vehicle-display">
-                        <div class="image-container">
-                            <img id="vehicle-image" 
-                                 src="https://placehold.co/1200x675/667eea/ffffff?text=Select+Your+Vehicle" 
-                                 alt="Vehicle preview"
-                                 class="vehicle-image">
-                            <div class="image-loading" id="image-loading">
-                                <div class="spinner"></div>
-                            </div>
-                        </div>
-                        
-                        <!-- View Selector -->
-                        <div class="view-selector">
-                            <button class="view-button active" data-view="front">Front</button>
-                            <button class="view-button" data-view="side">Side</button>
-                            <button class="view-button" data-view="back">Back</button>
-                            <button class="view-button" data-view="interior">Interior</button>
-                        </div>
+                        <img id="mainVehicleImage" src="images/level1/white/front.png" alt="Vehicle">
                     </div>
 
-                    <!-- Configuration Options -->
-                    <div class="configuration-panel">
-                        <!-- Model Selection -->
-                        <div class="config-section">
-                            <h2 class="section-title">Select Model</h2>
-                            <div class="model-grid">
-                                <button class="model-card" data-level="1">
-                                    <div class="model-name">Level 1</div>
-                                    <div class="model-type">Compact Sedan</div>
-                                    <div class="model-price">Starting at $45,000</div>
-                                </button>
-                                <button class="model-card" data-level="2">
-                                    <div class="model-name">Level 2</div>
-                                    <div class="model-type">Full-Size SUV</div>
-                                    <div class="model-price">Starting at $85,000</div>
-                                </button>
-                                <button class="model-card" data-level="3">
-                                    <div class="model-name">Level 3</div>
-                                    <div class="model-type">Performance Sedan</div>
-                                    <div class="model-price">Starting at $125,000</div>
-                                </button>
-                                <button class="model-card" data-level="4">
-                                    <div class="model-name">Level 4</div>
-                                    <div class="model-type">Ultra-Luxury SUV</div>
-                                    <div class="model-price">$185,000</div>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Trim Selection -->
-                        <div class="config-section" id="trim-section" style="display: none;">
-                            <h2 class="section-title">Select Trim</h2>
-                            <div class="trim-options" id="trim-options">
-                                <!-- Populated dynamically -->
-                            </div>
-                        </div>
-
-                        <!-- Color Selection -->
-                        <div class="config-section" id="color-section" style="display: none;">
-                            <h2 class="section-title">Select Color</h2>
-                            <div class="color-options" id="color-options">
-                                <!-- Populated dynamically -->
-                            </div>
-                        </div>
-
-                        <!-- Options & Packages -->
-                        <div class="config-section" id="options-section" style="display: none;">
-                            <h2 class="section-title">Options & Packages</h2>
-                            <div class="options-list" id="options-list">
-                                <!-- Populated dynamically -->
-                            </div>
-                        </div>
-
-                        <!-- Accessories -->
-                        <div class="config-section" id="accessories-section" style="display: none;">
-                            <h2 class="section-title">Accessories</h2>
-                            <div class="accessories-list">
-                                <label class="checkbox-option">
-                                    <input type="checkbox" name="accessory" value="floor-mats" data-price="400">
-                                    <span class="option-content">
-                                        <span class="option-name">Premium Floor Mats</span>
-                                        <span class="option-price">+$400</span>
-                                    </span>
-                                </label>
-                                <label class="checkbox-option">
-                                    <input type="checkbox" name="accessory" value="home-charger" data-price="800">
-                                    <span class="option-content">
-                                        <span class="option-name">Home EV Charger (Level 2, 240V)</span>
-                                        <span class="option-price">+$800</span>
-                                    </span>
-                                </label>
-                                <label class="checkbox-option">
-                                    <input type="checkbox" name="accessory" value="paint-protection" data-price="2000">
-                                    <span class="option-content">
-                                        <span class="option-name">Paint Protection Film (Full Front)</span>
-                                        <span class="option-price">+$2,000</span>
-                                    </span>
-                                </label>
-                                <label class="checkbox-option">
-                                    <input type="checkbox" name="accessory" value="ceramic-coating" data-price="1500">
-                                    <span class="option-content">
-                                        <span class="option-name">Ceramic Coating (Full Vehicle)</span>
-                                        <span class="option-price">+$1,500</span>
-                                    </span>
-                                </label>
-                            </div>
-                        </div>
+                    <!-- view selector -->
+                    <div class="view-selector">
+                        <button class="view-btn active" data-view="front">Front</button>
+                        <button class="view-btn" data-view="side">Side</button>
+                        <button class="view-btn" data-view="back">Back</button>
+                        <button class="view-btn" data-view="interior">Interior</button>
                     </div>
+                </div>
 
-                    <!-- Price Summary & Specs -->
-                    <div class="summary-panel">
-                        <!-- Price Breakdown -->
-                        <div class="summary-card">
-                            <h3 class="summary-title">Price Breakdown</h3>
-                            <div class="price-details">
-                                <div class="price-row">
-                                    <span>Base Price</span>
-                                    <span id="base-price">$0</span>
-                                </div>
-                                <div class="price-row">
-                                    <span>Options & Packages</span>
-                                    <span id="options-price">$0</span>
-                                </div>
-                                <div class="price-row">
-                                    <span>Accessories</span>
-                                    <span id="accessories-price">$0</span>
-                                </div>
-                                <div class="price-row subtotal">
-                                    <span>Subtotal</span>
-                                    <span id="subtotal-price">$0</span>
-                                </div>
-                                <div class="price-row">
-                                    <span>Tax (8.5%)</span>
-                                    <span id="tax-price">$0</span>
-                                </div>
-                                <div class="price-row total">
-                                    <span>Total</span>
-                                    <span id="total-price">$0</span>
-                                </div>
+                <!-- right side -->
+                <div class="config-right">
+                    <div class="config-content">
+
+                        <!-- trim selection -->
+                        <div class="config-group">
+                            <h3>Trim Level</h3>
+                            <div class="trim-options" id="trimOptions">
+                                <!-- populated by javascript -->
                             </div>
                         </div>
 
-                        <!-- Vehicle Specifications -->
-                        <div class="summary-card" id="specs-card" style="display: none;">
-                            <h3 class="summary-title">Specifications</h3>
+                        <!-- color selection -->
+                        <div class="config-group">
+                            <h3>Color</h3>
+                            <div class="color-options" id="colorOptions">
+                                <!-- populated by javascript -->
+                            </div>
+                        </div>
+
+                        <!-- specifications -->
+                        <div class="config-group">
+                            <h3>Specifications</h3>
                             <div class="specs-grid">
                                 <div class="spec-item">
-                                    <div class="spec-label">Power</div>
-                                    <div class="spec-value" id="spec-power">—</div>
+                                    <span class="spec-label">Power</span>
+                                    <span class="spec-value" id="specPower">290 hp</span>
                                 </div>
                                 <div class="spec-item">
-                                    <div class="spec-label">0-60 mph</div>
-                                    <div class="spec-value" id="spec-acceleration">—</div>
+                                    <span class="spec-label">0-60</span>
+                                    <span class="spec-value" id="specAccel">5.0s</span>
                                 </div>
                                 <div class="spec-item">
-                                    <div class="spec-label">Range</div>
-                                    <div class="spec-value" id="spec-range">—</div>
+                                    <span class="spec-label">Range</span>
+                                    <span class="spec-value" id="specRange">400 mi</span>
                                 </div>
                                 <div class="spec-item">
-                                    <div class="spec-label">Top Speed</div>
-                                    <div class="spec-value" id="spec-top-speed">—</div>
+                                    <span class="spec-label">Battery</span>
+                                    <span class="spec-value" id="specBattery">80 kWh</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Charging Info -->
-                        <div class="summary-card" id="charging-card" style="display: none;">
-                            <h3 class="summary-title">Charging</h3>
-                            <div class="charging-info">
-                                <div class="charging-row">
-                                    <span>Home (Level 2)</span>
-                                    <span id="home-charging">—</span>
-                                </div>
-                                <div class="charging-row">
-                                    <span>DC Fast (to 80%)</span>
-                                    <span id="fast-charging">—</span>
-                                </div>
+                        <!-- what's included -->
+                        <div class="config-group">
+                            <h3>What's Included</h3>
+                            <div class="features-list" id="trimFeaturesList">
+                                <!-- populated by javascript -->
                             </div>
                         </div>
 
-                        <!-- Environmental Impact -->
-                        <div class="summary-card" id="environmental-card" style="display: none;">
-                            <h3 class="summary-title">Environmental Impact</h3>
-                            <div class="environmental-info">
-                                <div class="environmental-row">
-                                    <span>CO₂ Saved (5 years)</span>
-                                    <span id="co2-saved">—</span>
-                                </div>
-                                <div class="environmental-row">
-                                    <span>Trees Equivalent</span>
-                                    <span id="trees-equivalent">—</span>
-                                </div>
+                        <!-- options -->
+                        <div class="config-group">
+                            <h3>Options</h3>
+                            <div class="options-list" id="optionsList">
+                                <!-- populated by javascript -->
                             </div>
                         </div>
 
-                        <!-- Payment Calculator -->
-                        <div class="summary-card" id="payment-card" style="display: none;">
-                            <h3 class="summary-title">Monthly Payment</h3>
-                            <div class="payment-calculator">
-                                <div class="calculator-input">
-                                    <label for="down-payment">Down Payment</label>
-                                    <input type="number" id="down-payment" value="10000" min="0" step="1000">
+                        <!-- accessories -->
+                        <div class="config-group">
+                            <h3>Accessories</h3>
+                            <div class="accessories-list" id="accessoriesList">
+                                <!-- populated by javascript -->
+                            </div>
+                        </div>
+
+                        <!-- pricing summary -->
+                        <div class="pricing-summary">
+                            <div class="price-row">
+                                <span>Base Price</span>
+                                <span id="basePrice">$45,000</span>
+                            </div>
+                            <div class="price-row hidden" id="optionsPriceRow">
+                                <span>Options</span>
+                                <span id="optionsPrice">$0</span>
+                            </div>
+                            <div class="price-row hidden" id="accessoriesPriceRow">
+                                <span>Accessories</span>
+                                <span id="accessoriesPrice">$0</span>
+                            </div>
+                            <div class="price-row">
+                                <span>Tax (8.5%)</span>
+                                <span id="taxAmount">$3,825</span>
+                            </div>
+                            <div class="price-row total">
+                                <span>Total</span>
+                                <span id="totalPrice">$48,825</span>
+                            </div>
+                        </div>
+
+                        <!-- payment calculator -->
+                        <div class="payment-calc">
+                            <div class="monthly-payment">
+                                <span>Estimated Monthly</span>
+                                <span class="payment-amount" id="monthlyPayment">$814</span>
+                            </div>
+                            <div class="calc-inputs">
+                                <div class="input-group">
+                                    <label>Down Payment</label>
+                                    <input type="number" id="downPayment" value="10000" min="0" step="1000">
                                 </div>
-                                <div class="calculator-input">
-                                    <label for="loan-term">Loan Term (months)</label>
-                                    <select id="loan-term">
-                                        <option value="36">36 months</option>
-                                        <option value="48">48 months</option>
-                                        <option value="60" selected>60 months</option>
-                                        <option value="72">72 months</option>
+                                <div class="input-group">
+                                    <label>APR %</label>
+                                    <input type="number" id="interestRate" value="5.9" min="0" max="20" step="0.1">
+                                </div>
+                                <div class="input-group">
+                                    <label>Term</label>
+                                    <select id="loanTerm">
+                                        <option value="36">36 Months</option>
+                                        <option value="48">48 Months</option>
+                                        <option value="60" selected>60 Months</option>
+                                        <option value="72">72 Months</option>
                                     </select>
                                 </div>
-                                <div class="calculator-input">
-                                    <label for="apr">APR (%)</label>
-                                    <input type="number" id="apr" value="5.9" min="0" max="20" step="0.1">
-                                </div>
-                                <div class="payment-result">
-                                    <div class="payment-amount" id="monthly-payment">$0</div>
-                                    <div class="payment-label">per month</div>
-                                </div>
                             </div>
                         </div>
 
-                        <!-- Order Button -->
-                        <button class="order-button" id="place-order-btn" style="display: none;">
-                            Place Order
-                        </button>
+                        <!-- order button -->
+                        <button class="order-btn" id="orderBtn">Complete Order</button>
                     </div>
-                </section>
-            </div>
-
-            <!-- Signature Models Tab -->
-            <div id="signature-models" class="tab-content">
-                <section class="signature-section">
-                    <div class="signature-intro">
-                        <h2 class="signature-main-title">Signature Collection</h2>
-                        <p class="signature-description">Pre-configured vehicles designed for specific lifestyles. Save time and money with expertly curated packages.</p>
-                    </div>
-
-                    <!-- Signature Grid -->
-                    <div class="signature-grid" id="signature-grid">
-                        <!-- Populated dynamically -->
-                    </div>
-
-                    <!-- Signature Detail View -->
-                    <div class="signature-detail" id="signature-detail" style="display: none;">
-                        <button class="back-button" id="back-to-grid">← Back to Collection</button>
-                        
-                        <div class="signature-detail-content">
-                            <div class="signature-detail-left">
-                                <div class="signature-image-container">
-                                    <img id="signature-image" 
-                                         src="" 
-                                         alt="Signature vehicle"
-                                         class="signature-vehicle-image">
-                                </div>
-                                
-                                <div class="signature-view-selector">
-                                    <button class="view-button active" data-sig-view="front">Front</button>
-                                    <button class="view-button" data-sig-view="side">Side</button>
-                                    <button class="view-button" data-sig-view="back">Back</button>
-                                    <button class="view-button" data-sig-view="interior">Interior</button>
-                                </div>
-                            </div>
-
-                            <div class="signature-detail-right">
-                                <h2 class="signature-detail-title" id="sig-detail-title"></h2>
-                                <p class="signature-detail-description" id="sig-detail-description"></p>
-                                
-                                <div class="signature-pricing">
-                                    <div class="signature-price-main" id="sig-price"></div>
-                                    <div class="signature-savings" id="sig-savings"></div>
-                                </div>
-
-                                <div class="signature-specs-summary" id="sig-specs">
-                                    <!-- Populated dynamically -->
-                                </div>
-
-                                <div class="signature-features" id="sig-features">
-                                    <!-- Populated dynamically -->
-                                </div>
-
-                                <button class="order-button" id="order-signature-btn">
-                                    Order This Signature
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                </div>
             </div>
         </div>
-    </main>
 
-    <!-- Order Confirmation Modal -->
-    <div class="modal" id="order-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Order Confirmed</h2>
-                <button class="modal-close" id="modal-close">&times;</button>
-            </div>
-            <div class="modal-body" id="modal-body">
-                <!-- Populated dynamically -->
+        <!-- signature details view -->
+        <div id="signatureView" class="view">
+            <div class="signature-layout">
+                <!-- left side - image -->
+                <div class="signature-left">
+                    <button class="back-btn" id="backToSignatures">&larr; Back to Signatures</button>
+
+                    <div class="signature-display">
+                        <img id="signatureVehicleImage" src="images/level1/silver/front.png" alt="Signature Vehicle">
+                    </div>
+
+                    <!-- view selector -->
+                    <div class="view-selector">
+                        <button class="view-btn active" data-view="front">Front</button>
+                        <button class="view-btn" data-view="side">Side</button>
+                        <button class="view-btn" data-view="back">Back</button>
+                        <button class="view-btn" data-view="interior">Interior</button>
+                    </div>
+                </div>
+
+                <!-- right side - details -->
+                <div class="signature-right">
+                    <div class="signature-content">
+                        <!-- signature header -->
+                        <div class="signature-header">
+                            <h2 id="signatureName">Urban Commuter</h2>
+                            <p class="signature-subtitle" id="signatureBasedOn">Based on Level 1 Premium</p>
+                        </div>
+
+                        <!-- price highlight -->
+                        <div class="signature-price-box">
+                            <div class="signature-prices">
+                                <div class="signature-final-price">
+                                    <span class="price-label">Signature Price</span>
+                                    <span class="price-value" id="signaturePrice">$55,500</span>
+                                </div>
+                                <div class="signature-regular-price">
+                                    <span>Regular Price: <span id="signatureRegularPrice">$56,000</span></span>
+                                </div>
+                            </div>
+                            <div class="signature-savings">
+                                <span>You Save</span>
+                                <span class="savings-amount" id="signatureSavings">$500</span>
+                            </div>
+                        </div>
+
+                        <!-- description -->
+                        <div class="signature-section">
+                            <h3>Description</h3>
+                            <p id="signatureDescription">The perfect daily driver for city professionals.</p>
+                        </div>
+
+                        <!-- what's included -->
+                        <div class="signature-section">
+                            <h3>What's Included</h3>
+                            <div id="signatureIncluded" class="signature-features">
+                                <!-- populated by javascript -->
+                            </div>
+                        </div>
+
+                        <!-- target customer -->
+                        <div class="signature-section">
+                            <h3>Perfect For</h3>
+                            <p id="signatureTarget">Daily commuters and tech enthusiasts</p>
+                        </div>
+
+                        <!-- specifications -->
+                        <div class="signature-section">
+                            <h3>Specifications</h3>
+                            <div class="specs-grid">
+                                <div class="spec-item">
+                                    <span class="spec-label">Power</span>
+                                    <span class="spec-value" id="sigSpecPower">290 hp</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">0-60</span>
+                                    <span class="spec-value" id="sigSpecAccel">5.0s</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Range</span>
+                                    <span class="spec-value" id="sigSpecRange">400 mi</span>
+                                </div>
+                                <div class="spec-item">
+                                    <span class="spec-label">Battery</span>
+                                    <span class="spec-value" id="sigSpecBattery">80 kWh</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- add accessories (optional) -->
+                        <div class="signature-section">
+                            <h3>Add Accessories (Optional)</h3>
+                            <div class="accessories-list" id="signatureAccessoriesList">
+                                <!-- populated by javascript -->
+                            </div>
+                        </div>
+
+                        <!-- total price summary -->
+                        <div class="signature-summary">
+                            <div class="price-row">
+                                <span>Signature Package</span>
+                                <span id="sigBasePrice">$55,500</span>
+                            </div>
+                            <div class="price-row hidden" id="sigAccessoriesPriceRow">
+                                <span>Accessories</span>
+                                <span id="sigAccessoriesPrice">$0</span>
+                            </div>
+                            <div class="price-row">
+                                <span>Tax (8.5%)</span>
+                                <span id="sigTaxAmount">$4,718</span>
+                            </div>
+                            <div class="price-row total">
+                                <span>Total</span>
+                                <span id="sigTotalPrice">$60,218</span>
+                            </div>
+                        </div>
+
+                        <!-- payment calculator -->
+                        <div class="payment-calc">
+                            <div class="monthly-payment">
+                                <span>Estimated Monthly</span>
+                                <span class="payment-amount" id="sigMonthlyPayment">$900</span>
+                            </div>
+                            <div class="calc-inputs">
+                                <div class="input-group">
+                                    <label>Down Payment</label>
+                                    <input type="number" id="sigDownPayment" value="10000" min="0" step="1000">
+                                </div>
+                                <div class="input-group">
+                                    <label>APR %</label>
+                                    <input type="number" id="sigInterestRate" value="5.9" min="0" max="20" step="0.1">
+                                </div>
+                                <div class="input-group">
+                                    <label>Term</label>
+                                    <select id="sigLoanTerm">
+                                        <option value="36">36 Months</option>
+                                        <option value="48">48 Months</option>
+                                        <option value="60" selected>60 Months</option>
+                                        <option value="72">72 Months</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- order button -->
+                        <button class="order-btn" id="signatureOrderBtn">Order Now</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Footer -->
-    <footer class="footer">
+<!-- ===================================
+     SIGNATURES PAGE
+     =================================== -->
+<div id="signaturesPage" class="page">
+    <div class="page-content">
         <div class="container">
-            <div class="footer-content">
-                <p>&copy; 2025 Raion Motors. All rights reserved.</p>
-                <div class="footer-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Contact</a>
+            <h2 class="page-title">Signature Collection</h2>
+
+            <div class="model-grid" id="signaturesGrid">
+                <!-- urban commuter -->
+                <div class="model-card signature" data-signature="urban-commuter">
+                    <div class="card-image">
+                        <img src="images/level1/silver/front.png" alt="Urban Commuter">
+                    </div>
+                    <div class="card-content">
+                        <h3>Urban Commuter</h3>
+                        <p class="card-subtitle">Level 1 Premium</p>
+                        <p class="card-price">$55,500 <span class="save">Save $500</span></p>
+                        <div class="card-specs">
+                            <span>290 hp</span>
+                            <span>400 mi</span>
+                            <span>Enhanced Autopilot</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- trail titan -->
+                <div class="model-card signature" data-signature="trail-titan">
+                    <div class="card-image">
+                        <img src="images/level2/black/front.png" alt="Trail Titan">
+                    </div>
+                    <div class="card-content">
+                        <h3>Trail Titan</h3>
+                        <p class="card-subtitle">Level 2 Off-Road</p>
+                        <p class="card-price">$97,500 <span class="save">Save $1,000</span></p>
+                        <div class="card-specs">
+                            <span>670 hp</span>
+                            <span>450 mi</span>
+                            <span>Off-Road Package</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- track beast -->
+                <div class="model-card signature" data-signature="track-beast">
+                    <div class="card-image">
+                        <img src="images/level3/green/front.png" alt="Track Beast">
+                    </div>
+                    <div class="card-content">
+                        <h3>Track Beast</h3>
+                        <p class="card-subtitle">Level 3 Ultra</p>
+                        <p class="card-price">$143,000 <span class="save">Save $2,000</span></p>
+                        <div class="card-specs">
+                            <span>1,600 hp</span>
+                            <span>350 mi</span>
+                            <span>Track Package</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- executive -->
+                <div class="model-card signature" data-signature="executive">
+                    <div class="card-image">
+                        <img src="images/level4/black/front.png" alt="Executive">
+                    </div>
+                    <div class="card-content">
+                        <h3>Executive</h3>
+                        <p class="card-subtitle">Level 4 Flagship</p>
+                        <p class="card-price">$193,000 <span class="save">Save $2,000</span></p>
+                        <div class="card-specs">
+                            <span>1,180 hp</span>
+                            <span>620 mi</span>
+                            <span>Massage Seats</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </footer>
+    </div>
+</div>
 
-    <script src="script.js"></script>
+<!-- order confirmation modal -->
+<div id="orderModal" class="modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="checkmark">âœ“</div>
+            <h2>Order Confirmed</h2>
+            <p>Thank you for choosing Raion Motors</p>
+        </div>
+        <div class="modal-body">
+            <div id="orderSummary">
+                <!-- populated by javascript -->
+            </div>
+            <p class="order-id">Order ID: <span id="orderId"></span></p>
+        </div>
+        <div class="modal-footer">
+            <button class="modal-btn secondary" id="newOrderBtn">New Order</button>
+            <button class="modal-btn primary" id="closeModalBtn">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- footer -->
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2025 Raion Motors</p>
+    </div>
+</footer>
+
+<!-- loading overlay -->
+<div id="loading" class="loading hidden">
+    <div class="spinner"></div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

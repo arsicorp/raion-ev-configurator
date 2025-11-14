@@ -5,44 +5,44 @@ import com.raion.models.VehicleColor;
 
 import java.io.File;
 
-// Resolves image paths for vehicle photos
-// Handles the 48 total images across all levels (4 views per color per level)
+// resolves image paths for vehicle photos
+// handles the 48 total images across all levels (4 views per color per level)
 public class ImagePathResolver {
 
     private static final String BASE_IMAGE_PATH = "images";
     private static final String[] VALID_VIEWS = {"front", "side", "back", "interior"};
 
-    // Private constructor - utility class with only static methods
+    // private constructor - utility class with only static methods
     private ImagePathResolver() {
-        throw new UnsupportedOperationException("Utility class cannot be instantiated");
+        throw new UnsupportedOperationException("utility class cannot be instantiated");
     }
 
-    // Get image path for a specific vehicle and view
-    // Returns path like: images/level1/white/front.png
+    // get image path for a specific vehicle and view
+    // returns path like: images/level1/white/front.png
     public static String getImagePath(Vehicle vehicle, String view) {
         if (vehicle == null) {
-            throw new IllegalArgumentException("Vehicle cannot be null");
+            throw new IllegalArgumentException("vehicle cannot be null");
         }
 
         return getImagePath(vehicle.getLevel(), vehicle.getColor(), view);
     }
 
-    // Get image path for specific level, color, and view
+    // get image path for specific level, color, and view
     public static String getImagePath(int level, VehicleColor color, String view) {
         if (level < 1 || level > 4) {
-            throw new IllegalArgumentException("Level must be between 1 and 4");
+            throw new IllegalArgumentException("level must be between 1 and 4");
         }
         if (color == null) {
-            throw new IllegalArgumentException("Color cannot be null");
+            throw new IllegalArgumentException("color cannot be null");
         }
         if (view == null || view.trim().isEmpty()) {
-            throw new IllegalArgumentException("View cannot be empty");
+            throw new IllegalArgumentException("view cannot be empty");
         }
 
-        // Normalize view to lowercase
+        // normalize view to lowercase
         view = view.toLowerCase().trim();
 
-        // Validate view is one of the supported types
+        // validate view is one of the supported types
         boolean validView = false;
         for (String validViewType : VALID_VIEWS) {
             if (validViewType.equals(view)) {
@@ -53,21 +53,21 @@ public class ImagePathResolver {
 
         if (!validView) {
             throw new IllegalArgumentException(
-                    "View must be one of: front, side, back, interior"
+                    "view must be one of: front, side, back, interior"
             );
         }
 
-        // Convert color enum to lowercase for folder name
+        // convert color enum to lowercase for folder name
         String colorFolder = color.name().toLowerCase();
 
-        // Build path: images/level{X}/{color}/{view}.png
+        // build path: images/level{X}/{color}/{view}.png
         return BASE_IMAGE_PATH + "/level" + level + "/" + colorFolder + "/" + view + ".png";
     }
 
-    // Get all image paths for a vehicle (all 4 views)
+    // get all image paths for a vehicle (all 4 views)
     public static String[] getAllImagePaths(Vehicle vehicle) {
         if (vehicle == null) {
-            throw new IllegalArgumentException("Vehicle cannot be null");
+            throw new IllegalArgumentException("vehicle cannot be null");
         }
 
         String[] paths = new String[VALID_VIEWS.length];
@@ -78,7 +78,7 @@ public class ImagePathResolver {
         return paths;
     }
 
-    // Check if an image file exists at the given path
+    // check if an image file exists at the given path
     public static boolean imageExists(String imagePath) {
         if (imagePath == null || imagePath.trim().isEmpty()) {
             return false;
@@ -88,18 +88,18 @@ public class ImagePathResolver {
         return imageFile.exists() && imageFile.isFile();
     }
 
-    // Get placeholder image URL for when actual image doesn't exist
-    // Uses placeholder service for development
+    // get placeholder image url for when actual image doesn't exist
+    // uses placeholder service for development
     public static String getPlaceholderUrl(int width, int height, String text) {
-        // Using a placeholder service like placehold.co
+        // using a placeholder service like placehold.co
         String encodedText = text.replace(" ", "+");
         return "https://placehold.co/" + width + "x" + height + "/667eea/ffffff?text=" + encodedText;
     }
 
-    // Get placeholder for vehicle view
+    // get placeholder for vehicle view
     public static String getVehiclePlaceholder(Vehicle vehicle, String view) {
         if (vehicle == null) {
-            return getPlaceholderUrl(800, 600, "No+Vehicle");
+            return getPlaceholderUrl(800, 600, "no+vehicle");
         }
 
         String text = vehicle.getModelName().replace(" ", "+") + "+" +
@@ -107,7 +107,7 @@ public class ImagePathResolver {
         return getPlaceholderUrl(800, 600, text);
     }
 
-    // Get image path or placeholder if image doesn't exist
+    // get image path or placeholder if image doesn't exist
     public static String getImagePathOrPlaceholder(Vehicle vehicle, String view) {
         String imagePath = getImagePath(vehicle, view);
 
@@ -118,12 +118,12 @@ public class ImagePathResolver {
         }
     }
 
-    // Get all supported views
+    // get all supported views
     public static String[] getSupportedViews() {
         return VALID_VIEWS.clone();
     }
 
-    // Get base image directory path
+    // get base image directory path
     public static String getBaseImagePath() {
         return BASE_IMAGE_PATH;
     }

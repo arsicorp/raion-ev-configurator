@@ -6,20 +6,21 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-// REST API controller for vehicle information
-// Handles all endpoints related to vehicles, trims, colors, and specs
+// rest api controller for vehicle information
+// handles all endpoints related to vehicles, trims, colors, and specs
 @RestController
 @RequestMapping("/api/vehicles")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class VehicleController {
 
-    // GET /api/vehicles - Get information about all 4 vehicle models
+    // get /api/vehicles - get information about all 4 vehicle models
     @GetMapping
     public ResponseEntity<Map<String, Object>> getAllVehicles() {
         Map<String, Object> response = new HashMap<>();
 
         List<Map<String, Object>> vehicles = new ArrayList<>();
 
-        // Level 1 info
+        // level 1 info
         Map<String, Object> level1 = new HashMap<>();
         level1.put("level", 1);
         level1.put("name", "Raion Level 1");
@@ -30,7 +31,7 @@ public class VehicleController {
         level1.put("range", 400);
         vehicles.add(level1);
 
-        // Level 2 info
+        // level 2 info
         Map<String, Object> level2 = new HashMap<>();
         level2.put("level", 2);
         level2.put("name", "Raion Level 2");
@@ -42,7 +43,7 @@ public class VehicleController {
         level2.put("seating", 7);
         vehicles.add(level2);
 
-        // Level 3 info
+        // level 3 info
         Map<String, Object> level3 = new HashMap<>();
         level3.put("level", 3);
         level3.put("name", "Raion Level 3");
@@ -53,7 +54,7 @@ public class VehicleController {
         level3.put("range", 350);
         vehicles.add(level3);
 
-        // Level 4 info
+        // level 4 info
         Map<String, Object> level4 = new HashMap<>();
         level4.put("level", 4);
         level4.put("name", "Raion Level 4");
@@ -69,175 +70,212 @@ public class VehicleController {
         return ResponseEntity.ok(response);
     }
 
-    // GET /api/vehicles/{level} - Get details about a specific vehicle level
+    // get /api/vehicles/{level} - get complete vehicle configuration data
+    // this returns everything the frontend configurator needs: trims, colors, options, accessories, specs
     @GetMapping("/{level}")
-    public ResponseEntity<Map<String, Object>> getVehicleByLevel(@PathVariable int level) {
+    public ResponseEntity<?> getVehicleByLevel(@PathVariable int level) {
         if (level < 1 || level > 4) {
-            return ResponseEntity.badRequest().body(Map.of("error", "Invalid level. Must be 1, 2, 3, or 4"));
+            return ResponseEntity.badRequest().body(
+                    Map.of("error", "Invalid level. Must be 1, 2, 3, or 4")
+            );
         }
 
-        Map<String, Object> vehicleInfo = new HashMap<>();
-        vehicleInfo.put("level", level);
+        Map<String, Object> vehicleData = new HashMap<>();
+        vehicleData.put("level", level);
 
+        // add basic vehicle info
         switch (level) {
             case 1:
-                vehicleInfo.put("name", "Raion Level 1");
-                vehicleInfo.put("bodyStyle", "Compact Sedan");
-                vehicleInfo.put("description", "Compact sedan inspired by Tesla Model 3");
-                vehicleInfo.put("drivetrain", "RWD");
-                vehicleInfo.put("battery", 80);
-                vehicleInfo.put("range", 400);
+                vehicleData.put("name", "Raion Level 1");
+                vehicleData.put("bodyStyle", "Compact Sedan");
+                vehicleData.put("description", "compact sedan inspired by tesla model 3");
+                vehicleData.put("drivetrain", "RWD");
+                vehicleData.put("battery", 80);
+                vehicleData.put("range", 400);
                 break;
             case 2:
-                vehicleInfo.put("name", "Raion Level 2");
-                vehicleInfo.put("bodyStyle", "Full-Size SUV");
-                vehicleInfo.put("description", "Full-size SUV inspired by Tesla Model X and Kia EV9");
-                vehicleInfo.put("drivetrain", "AWD");
-                vehicleInfo.put("battery", 100);
-                vehicleInfo.put("range", 450);
-                vehicleInfo.put("seating", 7);
+                vehicleData.put("name", "Raion Level 2");
+                vehicleData.put("bodyStyle", "Full-Size SUV");
+                vehicleData.put("description", "full-size suv inspired by tesla model x and kia ev9");
+                vehicleData.put("drivetrain", "AWD");
+                vehicleData.put("battery", 100);
+                vehicleData.put("range", 450);
+                vehicleData.put("seating", 7);
                 break;
             case 3:
-                vehicleInfo.put("name", "Raion Level 3");
-                vehicleInfo.put("bodyStyle", "Performance Sedan");
-                vehicleInfo.put("description", "Performance sedan inspired by Xiaomi SU7 Max Ultra and Porsche Taycan");
-                vehicleInfo.put("drivetrain", "AWD (Tri-Motor)");
-                vehicleInfo.put("battery", 94);
-                vehicleInfo.put("range", 350);
+                vehicleData.put("name", "Raion Level 3");
+                vehicleData.put("bodyStyle", "Performance Sedan");
+                vehicleData.put("description", "performance sedan inspired by xiaomi su7 max ultra and porsche taycan");
+                vehicleData.put("drivetrain", "AWD (Tri-Motor)");
+                vehicleData.put("battery", 94);
+                vehicleData.put("range", 350);
                 break;
             case 4:
-                vehicleInfo.put("name", "Raion Level 4");
-                vehicleInfo.put("bodyStyle", "Ultra-Luxury SUV");
-                vehicleInfo.put("description", "Ultra-luxury SUV inspired by Yangwang U8 and Rolls Royce Cullinan");
-                vehicleInfo.put("drivetrain", "AWD (Quad Motor)");
-                vehicleInfo.put("battery", 120);
-                vehicleInfo.put("range", 620);
-                vehicleInfo.put("seating", 4);
+                vehicleData.put("name", "Raion Level 4");
+                vehicleData.put("bodyStyle", "Ultra-Luxury SUV");
+                vehicleData.put("description", "ultra-luxury suv inspired by yangwang u8 and rolls royce cullinan");
+                vehicleData.put("drivetrain", "AWD (Quad Motor)");
+                vehicleData.put("battery", 120);
+                vehicleData.put("range", 620);
+                vehicleData.put("seating", 4);
                 break;
         }
 
-        return ResponseEntity.ok(vehicleInfo);
+        // add trims with full details (frontend needs: name, price, power, acceleration, range, battery)
+        vehicleData.put("trims", getTrimsForLevel(level));
+
+        // add colors with name and hex (frontend needs this format)
+        vehicleData.put("colors", getColorsForLevel(level));
+
+        // add available options with id, name, price (frontend needs id to track selections)
+        vehicleData.put("options", getOptionsForLevel(level));
+
+        // add available accessories with id, name, price (frontend needs id to track selections)
+        vehicleData.put("accessories", getAccessoriesForLevel(level));
+
+        return ResponseEntity.ok(vehicleData);
     }
 
-    // GET /api/vehicles/{level}/trims - Get available trims for a vehicle level
-    @GetMapping("/{level}/trims")
-    public ResponseEntity<?> getAvailableTrims(@PathVariable int level) {
-        if (level < 1 || level > 4) {
-            return ResponseEntity.badRequest().body(Map.of("error", "Invalid level. Must be 1, 2, 3, or 4"));
-        }
-
+    // get available trims for a vehicle level with complete specs
+    private List<Map<String, Object>> getTrimsForLevel(int level) {
         List<Map<String, Object>> trims = new ArrayList<>();
 
         switch (level) {
             case 1:
-                trims.add(createTrimInfo("STANDARD", "Standard", 45000, 290, 5.0));
-                trims.add(createTrimInfo("PREMIUM", "Premium", 50000, 290, 5.0));
-                trims.add(createTrimInfo("PERFORMANCE", "Performance", 55000, 360, 4.0));
+                trims.add(createTrimInfo("Standard", 45000, 290, 5.0, 140, 400, 80));
+                trims.add(createTrimInfo("Premium", 50000, 290, 5.0, 140, 400, 80));
+                trims.add(createTrimInfo("Performance", 55000, 360, 4.0, 155, 400, 80));
                 break;
             case 2:
-                trims.add(createTrimInfo("STANDARD", "Standard", 85000, 670, 6.0));
-                trims.add(createTrimInfo("PREMIUM", "Premium", 90000, 670, 6.0));
-                trims.add(createTrimInfo("OFFROAD", "Off-Road", 95000, 670, 6.0));
+                trims.add(createTrimInfo("Standard", 85000, 670, 6.0, 130, 450, 100));
+                trims.add(createTrimInfo("Premium", 90000, 670, 6.0, 130, 450, 100));
+                trims.add(createTrimInfo("Off-Road", 95000, 670, 6.0, 130, 450, 100));
                 break;
             case 3:
-                trims.add(createTrimInfo("PRO", "Pro", 125000, 1527, 2.0));
-                trims.add(createTrimInfo("MAX", "Max", 130000, 1527, 2.0));
-                trims.add(createTrimInfo("ULTRA", "Ultra", 135000, 1600, 1.8));
+                trims.add(createTrimInfo("Pro", 125000, 1527, 2.0, 217, 350, 94));
+                trims.add(createTrimInfo("Max", 130000, 1527, 2.0, 217, 350, 94));
+                trims.add(createTrimInfo("Ultra", 135000, 1600, 1.8, 224, 350, 94));
                 break;
             case 4:
-                trims.add(createTrimInfo("FLAGSHIP", "Flagship", 185000, 1180, 3.2));
+                trims.add(createTrimInfo("Flagship", 185000, 1180, 3.2, 155, 620, 120));
                 break;
         }
 
-        return ResponseEntity.ok(Map.of("level", level, "trims", trims));
+        return trims;
     }
 
-    // GET /api/vehicles/{level}/colors - Get available colors for a vehicle level
-    @GetMapping("/{level}/colors")
-    public ResponseEntity<?> getAvailableColors(@PathVariable int level) {
-        if (level < 1 || level > 4) {
-            return ResponseEntity.badRequest().body(Map.of("error", "Invalid level. Must be 1, 2, 3, or 4"));
-        }
-
+    // get available colors for a vehicle level
+    private List<Map<String, Object>> getColorsForLevel(int level) {
         List<Map<String, Object>> colors = new ArrayList<>();
 
         switch (level) {
             case 1:
             case 2:
-                colors.add(createColorInfo("WHITE", "Pearl White", "#FFFFFF"));
-                colors.add(createColorInfo("BLACK", "Obsidian Black", "#000000"));
-                colors.add(createColorInfo("SILVER", "Liquid Silver", "#C0C0C0"));
-                colors.add(createColorInfo("BLUE", "Electric Blue", "#0066CC"));
+                colors.add(createColorInfo("white", "Pearl White", "#FFFFFF"));
+                colors.add(createColorInfo("black", "Obsidian Black", "#000000"));
+                colors.add(createColorInfo("silver", "Liquid Silver", "#C0C0C0"));
+                colors.add(createColorInfo("blue", "Electric Blue", "#0066CC"));
                 break;
             case 3:
-                colors.add(createColorInfo("PURPLE", "Ultraviolet Purple", "#6A0DAD"));
-                colors.add(createColorInfo("BURGUNDY", "Deep Burgundy", "#800020"));
-                colors.add(createColorInfo("GREEN", "Racing Green", "#00563B"));
+                colors.add(createColorInfo("purple", "Ultraviolet Purple", "#6A0DAD"));
+                colors.add(createColorInfo("burgundy", "Deep Burgundy", "#800020"));
+                colors.add(createColorInfo("green", "Racing Green", "#00563B"));
                 break;
             case 4:
-                colors.add(createColorInfo("BLACK", "Obsidian Black", "#000000"));
+                colors.add(createColorInfo("black", "Obsidian Black", "#000000"));
                 break;
         }
 
-        return ResponseEntity.ok(Map.of("level", level, "colors", colors));
+        return colors;
     }
 
-    // GET /api/vehicles/{level}/options - Get available options for a vehicle level
-    @GetMapping("/{level}/options")
-    public ResponseEntity<?> getAvailableOptions(@PathVariable int level) {
-        if (level < 1 || level > 4) {
-            return ResponseEntity.badRequest().body(Map.of("error", "Invalid level. Must be 1, 2, 3, or 4"));
-        }
-
+    // get available options for a vehicle level
+    private List<Map<String, Object>> getOptionsForLevel(int level) {
         List<Map<String, Object>> options = new ArrayList<>();
 
-        // Options available on all levels
-        options.add(createOptionInfo("Enhanced Autopilot", 6000, "Autopilot"));
-        options.add(createOptionInfo("Full Self-Driving Capability", 8000, "Autopilot"));
-        options.add(createOptionInfo("Custom Paint Color", 2000, "Exterior"));
+        // options available on all levels
+        options.add(createOptionInfo("enhanced-autopilot", "Enhanced Autopilot", 6000,
+                "Navigate on Autopilot, Auto Lane Change, Autopark, Summon, Smart Summon"));
+        options.add(createOptionInfo("full-self-driving", "Full Self-Driving Capability", 8000,
+                "All Enhanced Autopilot features plus Traffic Light and Stop Sign Control"));
+        options.add(createOptionInfo("custom-paint", "Custom Paint Color", 2000,
+                "Exclusive custom paint finish beyond standard color options"));
 
-        // Level-specific options
+        // level-specific options
         if (level == 2 || level == 3) {
-            options.add(createOptionInfo("Massage Seats (Front & Rear)", 3000, "Comfort"));
+            options.add(createOptionInfo("massage-seats", "Massage Seats (Front & Rear)", 3000,
+                    "Multi-point massage functionality for front and rear seats"));
         }
 
         if (level == 3) {
-            options.add(createOptionInfo("Track Package", 10000, "Performance"));
+            options.add(createOptionInfo("track-package", "Track Package", 10000,
+                    "Carbon ceramic brakes, track telemetry system, lap timer with GPS"));
         }
 
         if (level == 4) {
-            options.add(createOptionInfo("Massage Seats (Front & Rear)", 5000, "Comfort"));
+            options.add(createOptionInfo("massage-seats", "Massage Seats (Front & Rear)", 5000,
+                    "18-point massage functionality for front and rear executive seats"));
         }
 
-        return ResponseEntity.ok(Map.of("level", level, "options", options));
+        return options;
     }
 
-    // Helper method to create trim info map
-    private Map<String, Object> createTrimInfo(String code, String name, double price, int power, double acceleration) {
+    // get available accessories for all levels (accessories are universal)
+    private List<Map<String, Object>> getAccessoriesForLevel(int level) {
+        List<Map<String, Object>> accessories = new ArrayList<>();
+
+        accessories.add(createAccessoryInfo("floor-mats", "Premium Floor Mats", 400,
+                "All-weather floor mats with Raion logo for all rows"));
+        accessories.add(createAccessoryInfo("home-charger", "Home EV Charger (Level 2, 240V)", 800,
+                "Wall-mounted Level 2 charger with 25-foot cable"));
+        accessories.add(createAccessoryInfo("paint-protection", "Paint Protection Film (Full Front)", 2000,
+                "Clear protective film for front bumper, hood, fenders, and mirrors"));
+        accessories.add(createAccessoryInfo("ceramic-coating", "Ceramic Coating (Full Vehicle)", 1500,
+                "Professional-grade ceramic coating for entire vehicle"));
+
+        return accessories;
+    }
+
+    // helper method to create trim info with all specs
+    private Map<String, Object> createTrimInfo(String name, double price, int power,
+                                               double acceleration, int topSpeed, int range, int battery) {
         Map<String, Object> trim = new HashMap<>();
-        trim.put("code", code);
         trim.put("name", name);
         trim.put("price", price);
         trim.put("power", power);
         trim.put("acceleration", acceleration);
+        trim.put("topSpeed", topSpeed);
+        trim.put("range", range);
+        trim.put("battery", battery);
         return trim;
     }
 
-    // Helper method to create color info map
-    private Map<String, Object> createColorInfo(String code, String name, String hex) {
+    // helper method to create color info
+    private Map<String, Object> createColorInfo(String name, String displayName, String hex) {
         Map<String, Object> color = new HashMap<>();
-        color.put("code", code);
-        color.put("name", name);
+        color.put("name", name);  // lowercase for frontend
+        color.put("displayName", displayName);
         color.put("hex", hex);
         return color;
     }
 
-    // Helper method to create option info map
-    private Map<String, Object> createOptionInfo(String name, double price, String category) {
+    // helper method to create option info with id
+    private Map<String, Object> createOptionInfo(String id, String name, double price, String description) {
         Map<String, Object> option = new HashMap<>();
+        option.put("id", id);  // frontend uses this to track selections
         option.put("name", name);
         option.put("price", price);
-        option.put("category", category);
+        option.put("description", description);
         return option;
+    }
+
+    // helper method to create accessory info with id
+    private Map<String, Object> createAccessoryInfo(String id, String name, double price, String description) {
+        Map<String, Object> accessory = new HashMap<>();
+        accessory.put("id", id);  // frontend uses this to track selections
+        accessory.put("name", name);
+        accessory.put("price", price);
+        accessory.put("description", description);
+        return accessory;
     }
 }

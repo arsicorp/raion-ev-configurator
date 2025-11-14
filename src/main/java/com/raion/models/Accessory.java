@@ -1,7 +1,7 @@
 package com.raion.models;
 
-// Physical accessories and add-ons customers can purchase
-// Things like floor mats, home chargers, paint protection, etc.
+// physical accessories and add-ons customers can purchase
+// things like floor mats, home chargers, paint protection, etc.
 public class Accessory implements Feature {
 
     private final String name;
@@ -9,18 +9,18 @@ public class Accessory implements Feature {
     private final String description;
     private final boolean isInstalled; // true if installed by dealer, false if customer takes home
 
-    // Constructor for accessories (defaults to not installed)
+    // constructor for accessories (defaults to not installed)
     public Accessory(String name, double price, String description) {
         this(name, price, description, false);
     }
 
-    // Constructor with installation option
+    // constructor with installation option
     public Accessory(String name, double price, String description, boolean isInstalled) {
         if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Accessory name cannot be empty");
+            throw new IllegalArgumentException("accessory name cannot be empty");
         }
         if (price < 0) {
-            throw new IllegalArgumentException("Accessory price cannot be negative");
+            throw new IllegalArgumentException("accessory price cannot be negative");
         }
 
         this.name = name;
@@ -53,13 +53,13 @@ public class Accessory implements Feature {
         return isInstalled;
     }
 
-    // Factory methods for standard accessories
+    // factory methods for standard accessories
 
     public static Accessory createPremiumFloorMats() {
         return new Accessory(
                 "Premium Floor Mats",
                 400.00,
-                "All-weather floor mats with Raion logo for all rows",
+                "all-weather floor mats with raion logo for all rows",
                 false
         );
     }
@@ -68,7 +68,7 @@ public class Accessory implements Feature {
         return new Accessory(
                 "Home EV Charger (Level 2, 240V)",
                 800.00,
-                "Wall-mounted Level 2 charger with 25-foot cable. Includes installation kit",
+                "wall-mounted level 2 charger with 25-foot cable. includes installation kit",
                 false
         );
     }
@@ -77,8 +77,8 @@ public class Accessory implements Feature {
         return new Accessory(
                 "Paint Protection Film (Full Front)",
                 2000.00,
-                "Clear protective film for front bumper, hood, fenders, and mirrors. Professional installation included",
-                true // Installed by dealer
+                "clear protective film for front bumper, hood, fenders, and mirrors. professional installation included",
+                true // installed by dealer
         );
     }
 
@@ -86,8 +86,8 @@ public class Accessory implements Feature {
         return new Accessory(
                 "Ceramic Coating (Full Vehicle)",
                 1500.00,
-                "Professional-grade ceramic coating for entire vehicle. Provides long-lasting protection and shine",
-                true // Installed by dealer
+                "professional-grade ceramic coating for entire vehicle. provides long-lasting protection and shine",
+                true // installed by dealer
         );
     }
 

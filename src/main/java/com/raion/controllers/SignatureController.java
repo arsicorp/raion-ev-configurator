@@ -6,20 +6,21 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-// REST API controller for signature vehicles
-// Handles pre-configured vehicle packages that save customers money
+// rest api controller for signature vehicles
+// handles pre-configured vehicle packages that save customers money
 @RestController
 @RequestMapping("/api/signatures")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class SignatureController {
 
-    // GET /api/signatures - Get information about all 4 signature vehicles
+    // get /api/signatures - get information about all 4 signature vehicles
     @GetMapping
     public ResponseEntity<Map<String, Object>> getAllSignatures() {
         Map<String, Object> response = new HashMap<>();
 
         List<Map<String, Object>> signatures = new ArrayList<>();
 
-        // Urban Commuter Signature
+        // urban commuter signature
         UrbanCommuterSignature urbanCommuter = new UrbanCommuterSignature();
         signatures.add(createSignatureSummary(
                 "urban-commuter",
@@ -34,7 +35,7 @@ public class SignatureController {
                 urbanCommuter.getAcceleration()
         ));
 
-        // Trail Titan Signature
+        // trail titan signature
         TrailTitanSignature trailTitan = new TrailTitanSignature();
         signatures.add(createSignatureSummary(
                 "trail-titan",
@@ -49,7 +50,7 @@ public class SignatureController {
                 trailTitan.getAcceleration()
         ));
 
-        // Track Beast Signature
+        // track beast signature
         TrackBeastSignature trackBeast = new TrackBeastSignature();
         signatures.add(createSignatureSummary(
                 "track-beast",
@@ -64,7 +65,7 @@ public class SignatureController {
                 trackBeast.getAcceleration()
         ));
 
-        // Executive Signature
+        // executive signature
         ExecutiveSignature executive = new ExecutiveSignature();
         signatures.add(createSignatureSummary(
                 "executive",
@@ -84,7 +85,7 @@ public class SignatureController {
         return ResponseEntity.ok(response);
     }
 
-    // GET /api/signatures/{name} - Get detailed info about a specific signature
+    // get /api/signatures/{name} - get detailed info about a specific signature
     @GetMapping("/{name}")
     public ResponseEntity<?> getSignatureByName(@PathVariable String name) {
         name = name.toLowerCase().trim();
@@ -162,14 +163,14 @@ public class SignatureController {
 
             default:
                 return ResponseEntity.badRequest().body(
-                        Map.of("error", "Invalid signature name. Must be: urban-commuter, trail-titan, track-beast, or executive")
+                        Map.of("error", "invalid signature name. must be: urban-commuter, trail-titan, track-beast, or executive")
                 );
         }
 
         return ResponseEntity.ok(signatureDetails);
     }
 
-    // Helper method to create signature summary (for list view)
+    // helper method to create signature summary (for list view)
     private Map<String, Object> createSignatureSummary(
             String id,
             String name,
@@ -191,7 +192,7 @@ public class SignatureController {
         signature.put("targetCustomer", targetCustomer);
         signature.put("color", color);
 
-        // Key specs
+        // key specs
         Map<String, Object> specs = new HashMap<>();
         specs.put("range", range);
         specs.put("power", power);
@@ -201,7 +202,7 @@ public class SignatureController {
         return signature;
     }
 
-    // Helper method to create detailed signature info (for detail view)
+    // helper method to create detailed signature info (for detail view)
     private Map<String, Object> createDetailedSignatureInfo(
             String id,
             String name,
@@ -217,14 +218,14 @@ public class SignatureController {
     ) {
         Map<String, Object> details = new HashMap<>();
 
-        // Basic info
+        // basic info
         details.put("id", id);
         details.put("name", name);
         details.put("description", description);
         details.put("baseLevel", baseLevel);
         details.put("basedOn", basedOn);
 
-        // Pricing
+        // pricing
         Map<String, Object> pricing = new HashMap<>();
         pricing.put("signaturePrice", signaturePrice);
         pricing.put("regularPrice", regularPrice);
@@ -232,11 +233,11 @@ public class SignatureController {
         pricing.put("savingsPercentage", Math.round((savings / regularPrice) * 100 * 100.0) / 100.0);
         details.put("pricing", pricing);
 
-        // Features and target customer
+        // features and target customer
         details.put("includedFeatures", includedFeatures);
         details.put("targetCustomer", targetCustomer);
 
-        // Vehicle specifications
+        // vehicle specifications
         Map<String, Object> specs = new HashMap<>();
         if (vehicle instanceof UrbanCommuterSignature) {
             UrbanCommuterSignature v = (UrbanCommuterSignature) vehicle;

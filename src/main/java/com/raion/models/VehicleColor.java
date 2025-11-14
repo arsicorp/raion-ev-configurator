@@ -1,19 +1,19 @@
 package com.raion.models;
 
-// All available colors for our vehicles
-// Level 1 & 2: White, Black, Silver, Blue
-// Level 3: Purple, Burgundy, Green (exclusive performance colors)
-// Level 4: Black only (ultra-exclusive)
+// all available colors for our vehicles
+// level 1 & 2: white, black, silver, blue
+// level 3: purple, burgundy, green (exclusive performance colors)
+// level 4: black only (ultra-exclusive)
 
 public enum VehicleColor {
 
-    // Standard colors for Level 1 & 2
+    // standard colors for level 1 & 2
     WHITE("Pearl White", "#FFFFFF"),
     BLACK("Obsidian Black", "#000000"),
     SILVER("Liquid Silver", "#C0C0C0"),
     BLUE("Electric Blue", "#0066CC"),
 
-    // Exclusive colors for Level 3 performance vehicles
+    // exclusive colors for level 3 performance vehicles
     PURPLE("Ultraviolet Purple", "#6A0DAD"),
     BURGUNDY("Deep Burgundy", "#800020"),
     GREEN("Racing Green", "#00563B");
@@ -34,7 +34,7 @@ public enum VehicleColor {
         return hexCode;
     }
 
-    // Check which vehicle level can use this color
+    // check which vehicle level can use this color
     public boolean isLevel1Color() {
         return this == WHITE || this == BLACK || this == SILVER || this == BLUE;
     }

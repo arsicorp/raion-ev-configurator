@@ -1,40 +1,40 @@
 package com.raion.models;
 
-// Level 1 - Compact Sedan (inspired by Tesla Model 3)
-// Available in: White, Black, Silver, Blue
-// Trims: Standard ($45k), Premium ($50k), Performance ($55k)
+// level 1 - compact sedan (inspired by tesla model 3)
+// available in: white, black, silver, blue
+// trims: standard ($45k), premium ($50k), performance ($55k)
 public class Level1 extends Vehicle {
 
     private static final String MODEL_NAME = "Raion Level 1";
-    private static final int BATTERY_CAPACITY = 80; // kWh
+    private static final int BATTERY_CAPACITY = 80; // kwh
     private static final int STANDARD_RANGE = 400; // miles
 
     public Level1(TrimLevel trimLevel, VehicleColor color) {
         super(MODEL_NAME, trimLevel, color);
 
-        // Validate this trim is allowed for Level 1
+        // validate this trim is allowed for level 1
         if (!trimLevel.isLevel1Trim()) {
             throw new IllegalArgumentException(
-                    "Invalid trim for Level 1. Must be STANDARD, PREMIUM, or PERFORMANCE"
+                    "invalid trim for level 1. must be standard, premium, or performance"
             );
         }
 
-        // Validate this color is allowed for Level 1
+        // validate this color is allowed for level 1
         if (!color.isLevel1Color()) {
             throw new IllegalArgumentException(
-                    "Invalid color for Level 1. Must be WHITE, BLACK, SILVER, or BLUE"
+                    "invalid color for level 1. must be white, black, silver, or blue"
             );
         }
 
-        // Set common specs for all Level 1 vehicles
+        // set common specs for all level 1 vehicles
         setBatteryCapacity(BATTERY_CAPACITY);
         setRange(STANDARD_RANGE);
 
-        // Configure trim-specific specs
+        // configure trim-specific specs
         configureTrimSpecs();
     }
 
-    // Set up specs based on which trim was selected
+    // set up specs based on which trim was selected
     private void configureTrimSpecs() {
         switch (trimLevel) {
             case STANDARD:
@@ -62,7 +62,7 @@ public class Level1 extends Vehicle {
                 break;
 
             default:
-                throw new IllegalStateException("Unexpected trim level: " + trimLevel);
+                throw new IllegalStateException("unexpected trim level: " + trimLevel);
         }
     }
 
@@ -85,10 +85,10 @@ public class Level1 extends Vehicle {
         specs.append("Battery: ").append(batteryCapacity).append(" kWh\n");
         specs.append("Base Price: $").append(String.format("%,.2f", basePrice)).append("\n");
 
-        // Add charging estimates
+        // add charging estimates
         specs.append("\nCharging Times:\n");
         specs.append("Home (Level 2): ").append(String.format("%.1f", getHomeChargingTime())).append(" hours\n");
-        specs.append("DC Fast Charge (to 80%%): ").append(String.format("%.0f", getFastChargingTime())).append(" minutes\n");
+        specs.append("DC Fast Charge (to 80%): ").append(String.format("%.0f", getFastChargingTime())).append(" minutes\n");
 
         return specs.toString();
     }
@@ -98,22 +98,22 @@ public class Level1 extends Vehicle {
         return 1;
     }
 
-    // Get trim-specific features description
+    // get trim-specific features description
     public String getTrimFeatures() {
         switch (trimLevel) {
             case STANDARD:
-                return "Standard features include: Basic leather seats, 15-inch touchscreen, " +
-                        "Basic Autopilot, glass panoramic roof, heated/ventilated front seats, " +
+                return "standard features include: basic leather seats, 15-inch touchscreen, " +
+                        "basic autopilot, glass panoramic roof, heated/ventilated front seats, " +
                         "heated rear seats, 360-degree cameras, wireless charging";
 
             case PREMIUM:
-                return "Premium adds: Premium audio (18 speakers), upgraded Nappa leather, " +
+                return "premium adds: premium audio (18 speakers), upgraded nappa leather, " +
                         "20-inch alloy wheels, enhanced ambient lighting, ventilated rear seats, " +
                         "premium interior materials";
 
             case PERFORMANCE:
-                return "Performance adds: Sport seats with bolsters, adaptive sport suspension, " +
-                        "performance brakes, 20-inch performance wheels, Track Mode, Launch Control, " +
+                return "performance adds: sport seats with bolsters, adaptive sport suspension, " +
+                        "performance brakes, 20-inch performance wheels, track mode, launch control, " +
                         "sport steering wheel, carbon fiber accents";
 
             default:

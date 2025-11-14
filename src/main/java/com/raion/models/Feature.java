@@ -1,23 +1,23 @@
 package com.raion.models;
 
-// Interface for anything that can be added to a vehicle order
-// This lets us treat Options, ServicePackages, and Accessories the same way
-// Order class uses List<Feature> so it can hold any combination of these
+// interface for anything that can be added to a vehicle order
+// this lets us treat options, servicepackages, and accessories the same way
+// order class uses list<feature> so it can hold any combination of these
 
 public interface Feature {
 
-    // Basic info every feature needs
+    // basic info every feature needs
     String getName();
     double getPrice();
     String getDescription();
 
-    // Category helps organize features in the UI (like "Autopilot" or "Warranty")
+    // category helps organize features in the ui (like "autopilot" or "warranty")
     default String getCategory() {
         return "Feature";
     }
 
-    // Check if this feature works with a specific vehicle level
-    // Default is yes for all vehicles, but subclasses can override
+    // check if this feature works with a specific vehicle level
+    // default is yes for all vehicles, but subclasses can override
     default boolean isEligibleFor(int vehicleLevel) {
         return true;
     }

@@ -1,38 +1,38 @@
 package com.raion.models;
 
-// Level 4 - Ultra-Luxury SUV (inspired by Yangwang U8 + Rolls Royce Cullinan)
-// Available in: Black only (ultra-exclusive)
-// Only one trim: Flagship ($185k)
+// level 4 - ultra-luxury suv (inspired by yangwang u8 + rolls royce cullinan)
+// available in: black only (ultra-exclusive)
+// only one trim: flagship ($185k)
 // 4-seater ultra-luxury configuration with everything included
 public class Level4 extends Vehicle {
 
     private static final String MODEL_NAME = "Raion Level 4";
-    private static final int BATTERY_CAPACITY = 120; // kWh
+    private static final int BATTERY_CAPACITY = 120; // kwh
     private static final int FLAGSHIP_RANGE = 620; // miles (longest range)
-    private static final int SEATING_CAPACITY = 4; // Ultra-luxury 4-seater
+    private static final int SEATING_CAPACITY = 4; // ultra-luxury 4-seater
 
     public Level4(VehicleColor color) {
-        // Level 4 only has Flagship trim, so we hardcode it
+        // level 4 only has flagship trim, so we hardcode it
         super(MODEL_NAME, TrimLevel.FLAGSHIP, color);
 
-        // Validate this color is allowed for Level 4 (BLACK only)
+        // validate this color is allowed for level 4 (black only)
         if (!color.isLevel4Color()) {
             throw new IllegalArgumentException(
-                    "Invalid color for Level 4. Must be BLACK only"
+                    "invalid color for level 4. must be black only"
             );
         }
 
-        // Set all specs for the Flagship
+        // set all specs for the flagship
         setBasePrice(185000);
         setBatteryCapacity(BATTERY_CAPACITY);
         setRange(FLAGSHIP_RANGE);
-        setPower(1180); // Quad motor
+        setPower(1180); // quad motor
         setAcceleration(3.2);
-        setTopSpeed(155); // Luxury focused, not max speed
+        setTopSpeed(155); // luxury focused, not max speed
         setDrivetrain("AWD (Quad Motor)");
     }
 
-    // Convenience constructor that automatically uses BLACK
+    // convenience constructor that automatically uses black
     public Level4() {
         this(VehicleColor.BLACK);
     }
@@ -57,10 +57,10 @@ public class Level4 extends Vehicle {
         specs.append("Battery: ").append(batteryCapacity).append(" kWh\n");
         specs.append("Base Price: $").append(String.format("%,.2f", basePrice)).append("\n");
 
-        // Add charging estimates
+        // add charging estimates
         specs.append("\nCharging Times:\n");
         specs.append("Home (Level 2): ").append(String.format("%.1f", getHomeChargingTime())).append(" hours\n");
-        specs.append("DC Fast Charge (to 80%%): ").append(String.format("%.0f", getFastChargingTime())).append(" minutes\n");
+        specs.append("DC Fast Charge (to 80%): ").append(String.format("%.0f", getFastChargingTime())).append(" minutes\n");
 
         return specs.toString();
     }
@@ -74,19 +74,19 @@ public class Level4 extends Vehicle {
         return SEATING_CAPACITY;
     }
 
-    // Everything included description - no separate trims
+    // everything included description - no separate trims
     public String getIncludedFeatures() {
-        return "EVERYTHING INCLUDED: Premium Nappa leather everywhere, real wood trim (Sapele), " +
+        return "everything included: premium nappa leather everywhere, real wood trim (sapele), " +
                 "24+ speaker ultra-premium audio system, adaptive air suspension (self-leveling), " +
-                "Full Self-Driving Capability (INCLUDED), executive rear seats with zero-gravity mode, " +
+                "full self-driving capability (included), executive rear seats with zero-gravity mode, " +
                 "power recline, power leg rests, heated/ventilated/cooled seats, 18-point adjustment, " +
                 "executive tray tables, refrigerator/cooler between rear seats, dual rear entertainment screens, " +
-                "starlight headliner (LED constellation), panoramic glass roof, customizable ambient lighting (64 colors), " +
-                "360-degree cameras with night vision, AR head-up display, 3 wireless phone charging pads (50W fast charge), " +
+                "starlight headliner (led constellation), panoramic glass roof, customizable ambient lighting (64 colors), " +
+                "360-degree cameras with night vision, ar head-up display, 3 wireless phone charging pads (50w fast charge), " +
                 "rear-wheel steering, all advanced safety features, hand-stitched everything, bespoke customization available";
     }
 
-    // Level 4 is the only model with Full Self-Driving included
+    // level 4 is the only model with full self-driving included
     public boolean hasFullSelfDrivingIncluded() {
         return true;
     }
